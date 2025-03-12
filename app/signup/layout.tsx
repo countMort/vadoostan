@@ -6,12 +6,12 @@ export default function RootLayout({
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
+        display: 'flex',
+        justifyContent: 'center',
         paddingBlockStart: 70,
       }}
     >
-      <div style={{ width: "340px" }}>{children}</div>
+      <div style={{ width: '340px' }}>{children}</div>
     </div>
   );
 }
