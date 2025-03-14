@@ -3,12 +3,14 @@ import { SignUpForm } from './form';
 import { Otp } from '@/app/components';
 import { useState } from 'react';
 import { LoginHeader } from '../components/loginHeader';
+import { useRouter } from 'next/navigation';
 
 type SignupStatus = 'signup' | 'otp';
 
 const Signup = () => {
   const [signUpStatus, setSignUpStatus] = useState<SignupStatus>('signup');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const router = useRouter();
 
   const onSubmitForm = (phone?: string) => {
     if (phone) {
@@ -18,8 +20,7 @@ const Signup = () => {
   };
 
   const onVerifyOtp = () => {
-    // Handle OTP verification logic here
-    console.log('OTP verified');
+    router.push('/experience');
   };
 
   const onResendOtp = () => {
