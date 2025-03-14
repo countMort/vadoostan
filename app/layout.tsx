@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist_Mono, Vazirmatn } from 'next/font/google';
 import '@mantine/core/styles.css';
+import '@mantine/carousel/styles.css';
 import {
   ColorSchemeScript,
   createTheme,
@@ -52,3 +53,25 @@ export default function RootLayout({
     </DirectionProvider>
   );
 }
+
+// import classes from './style.module.scss';
+// export default function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) {
+//   return (
+//     <div className={classes['layout-wrapper']}>
+//       <div
+//         style={{
+//           width: '440px',
+//           height: '100%',
+//           display: 'flex',
+//           flexDirection: 'column',
+//         }}
+//       >
+//         {children}
+//       </div>
+//     </div>
+//   );
+// }

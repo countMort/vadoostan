@@ -64,7 +64,7 @@ const Otp = ({ onVerify, onResend, phoneNumber = '09123456789' }: OtpProps) => {
           onChange={setOtp}
           numInputs={4}
           renderInput={(props) => (
-            <input {...props} className={classes['otp-input']} />
+            <input {...props} type='number' className={classes['otp-input']} />
           )}
           containerStyle={classes['otp-input-wrapper']}
           shouldAutoFocus
