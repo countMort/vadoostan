@@ -1,8 +1,10 @@
+'use client';
 import classes from './style.module.scss';
 import {
   ActionButton,
   DescriptionArea,
   ExperienceOption,
+  Carousel,
 } from '@/app/components';
 import Image from 'next/image';
 
@@ -18,18 +20,35 @@ const Experience = () => {
       />
     );
   });
+
+  const directorInformation = (
+    <div className={classes['director']}>
+      <Image
+        className={classes['director--image']}
+        src={'/director.png'}
+        width={55}
+        height={55}
+        alt='director-image'
+      />
+      <div className={classes['director--detail']}>
+        <div className={classes['director--name']}>ثمین مسعودی</div>
+        <div className={classes['director--role']}>برگزار کننده</div>
+      </div>
+    </div>
+  );
+
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ flex: 1, overflowY: 'auto' }}>
-        <div className={classes['carousel']} />
+    <div style={{ height: '100%', position: 'relative' }}>
+      <div style={{ paddingBlockEnd: 80 }}>
+        <div className={classes['carousel']}>
+          <Carousel />
+        </div>
         <div className={classes['title-wrapper']}>
           <div className={classes['title']}>شبِ خلق: سفالگری با چرخ</div>
           <div className={classes['abbr']}>
             <div className={classes['date']}>۱۲ بهمن، ساعت ۱۶:۰۰</div>
             <div className={classes['circle']} />
             <div className={classes['location']}>محله توحید</div>
-            <div className={classes['circle']} />
-            <div className={classes['price']}>500 هزار تومان</div>
           </div>
         </div>
         <div className={classes['main-content-wrapper']}>
@@ -49,6 +68,12 @@ const Experience = () => {
             title='سوالات متداول'
             description={
               'رداد و تغییر بلیت در صفحه شرایط و ضوابط ذکر شده است. لطفاً قبل از خرید آ.قوانین مربوط به استرداد و تغییر بلیت در صفحه شرایط و ضوابط ذکر شده  تغییر بلیت در صفحه شرایط و ضوابط ذکر شدهاست. لطفاً قبل از خرید آن را مطالعه کنید.قوانین مربوط به استرداد و تغییر بلیت در صفحه شرایط و ضوابط ذکر شده است. لطفاً قبل از خرید آن را مطالعه کنید.قوانین مربوط به استرداد و تغییر بلیت در صفحه شرایط و ضوابط ذکر شده است. لطفاً قبل از خرید آن را مطالعه کنید.'
+            }
+          />
+          <DescriptionArea
+            title={directorInformation}
+            description={
+              'ثمین مسعودی یک برگزارکننده خلاق رویدادهای هنری و فرهنگی است که با تمرکز بر تقویت همدلی و ارتباطات انسانی، رویداد *شب خلق و دوستان* را پایه‌گذاری کرده است. او همچنین بنیان‌گذار *استودیو هنری اثر* است، فضایی که به تولید و نمایش آثار هنری نوآورانه اختصاص دارد. ثمین با رویکردی میان‌رشته‌ای، مرزهای هنر، اجتماع و تجربه‌های مشارکتی را در هم می‌آمیزد تا بستری برای الهام‌بخشی و هم‌آفرینی میان هنرمندان و مخاطبان فراهم کند.'
             }
           />
         </div>

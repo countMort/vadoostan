@@ -1,0 +1,38 @@
+.embla {
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+.embla__container {
+  display: flex;
+  height: 100%;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  background-color: #ffffff;
+}
+
+.image {
+  height: 248px;
+  width: 100%;
+}
+
+.dot-container {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  column-gap: 26px;
+}
+
+.dot {
+  width: 35px;
+  height: 6px;
+  border-radius: 35px;
+  background-color: #848484;
+  &--selected {
+    background-color: #ffffff;
+  }
+}
