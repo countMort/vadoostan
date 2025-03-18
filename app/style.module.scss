@@ -8,4 +8,52 @@
 .app {
   background-color: #ffffff;
   height: 100%;
+  width: 100%;
+}
+
+.landing {
+  height: 100%;
+  width: 100%;
+}
+
+.image {
+  width: 100%;
+  height: calc(100% - 218px);
+  background:
+    linear-gradient(to top, rgb(255, 255, 255, 1), rgba(255, 255, 255, 0)),
+    /* Gradient overlay */ url(/landing.png); /* Background image */
+}
+
+.actions {
+  height: 218px;
+  // background-color: red;
+}
+
+.title-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  column-gap: 12px;
+  a {
+    all: unset;
+  }
+}
+.list-text {
+  font-weight: 500;
+  font-size: 14px;
+  color: #585858;
+  margin-top: 20px;
+  text-align: center;
 }
