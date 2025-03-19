@@ -1,3 +1,4 @@
+'use client';
 import classes from './style.module.scss';
 import {
   ActionButton,
@@ -6,10 +7,10 @@ import {
   Carousel,
 } from '@/app/components';
 import Image from 'next/image';
-import { cookies } from 'next/headers';
+import { deleteCookie, getCookie } from 'cookies-next';
 
-const Experience = async () => {
-  const options = [...new Array(5)].map((item, index) => {
+const Experience = () => {
+  const options = [...new Array(5)].map((_, index) => {
     return (
       <ExperienceOption
         key={index}
@@ -35,9 +36,7 @@ const Experience = async () => {
     </div>
   );
 
-  const cookieStore = await cookies();
-
-  const cookie = cookieStore.get('token');
+  const cookie = getCookie('token');
 
   return (
     <div style={{ height: '100%', position: 'relative' }}>
@@ -45,7 +44,14 @@ const Experience = async () => {
         <div className={classes['carousel']}>
           <Carousel />
         </div>
-        <div>{cookie?.value ?? 'no-cookie'}</div>
+        <div>{cookie ?? 'no-cookie'}</div>
+        <button
+          onClick={() => {
+            deleteCookie('token');
+          }}
+        >
+          delete coockie
+        </button>
         <div className={classes['title-wrapper']}>
           <div className={classes['title']}>شبِ خلق: سفالگری با چرخ</div>
           <div className={classes['abbr']}>
