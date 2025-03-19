@@ -14,7 +14,6 @@ export const useDotButton = (emblaApi: EmblaCarouselType | undefined) => {
   );
 
   const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-    console.log(emblaApi.scrollSnapList(), 'dasd');
     setScrollSnaps(emblaApi.scrollSnapList());
   }, []);
 

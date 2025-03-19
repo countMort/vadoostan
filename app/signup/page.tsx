@@ -4,6 +4,7 @@ import { Otp } from '@/app/components';
 import { useState } from 'react';
 import { LoginHeader } from '../components/loginHeader';
 import { useRouter } from 'next/navigation';
+import { setCookie } from 'cookies-next';
 
 type SignupStatus = 'signup' | 'otp';
 
@@ -20,6 +21,8 @@ const Signup = () => {
   };
 
   const onVerifyOtp = () => {
+    setCookie('token', 'test-for-cookie');
+    console.log('sdfsdf');
     router.push('/experience');
   };
 

@@ -17,6 +17,7 @@
 }
 
 .image {
+  padding-block-end: 217px;
   width: 100%;
   height: calc(100% - 218px);
   background:
@@ -26,6 +27,9 @@
 
 .actions {
   height: 218px;
+  background-color: #ffffff;
+  position: fixed;
+  width: 100%;
   // background-color: red;
 }
 
