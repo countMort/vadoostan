@@ -28,7 +28,7 @@ export default function Home() {
               fontSize: 18,
             }}
           >
-            ورود
+            <Link href={'/login'}>ورود</Link>
           </Button>
         </div>
         <div className={classes['list-text']}>لیست تجربه‌ها</div>

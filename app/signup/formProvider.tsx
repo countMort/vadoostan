@@ -1,6 +1,6 @@
 import { createFormContext } from '@/app/utils';
 
-export const LoginFormContext = createFormContext<{
+export const SignupFormContext = createFormContext<{
   name: string;
   family: string;
   phone: number | undefined;
@@ -10,14 +10,14 @@ export const LoginFormContext = createFormContext<{
   phone: undefined,
 });
 
-export const LoginFormProvider = ({
+export const SignupFormProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
   return (
-    <LoginFormContext.Provider mode='onSubmit'>
+    <SignupFormContext.Provider mode='onSubmit'>
       {children}
-    </LoginFormContext.Provider>
+    </SignupFormContext.Provider>
   );
 };

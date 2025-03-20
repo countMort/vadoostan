@@ -1,22 +1,19 @@
 'use client';
 import { ActionButton, TextInput } from '@/app/components';
 import classes from './style.module.scss';
-import { LoginFormContext, LoginFormProvider } from './formProvider';
+import { SignupFormContext, SignupFormProvider } from './formProvider';
 import { Input } from '@mantine/core';
+import { familyRules, nameRules, phoneNumberRule } from '@/app/utils';
 
 interface SignUpFormProps {
   onSubmitForm: (phone?: string) => void;
 }
 
 const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
-  const persianRegex = /^[\u0600-\u06FF\s]+$/;
-  const phoneNumberRegex = /^09\d{9}$/;
-  const requireFieldMessage = 'این فیلد الزامی است';
-
-  const { Controller } = LoginFormContext;
-  const { handleSubmit } = LoginFormContext.useFormContext();
-  const { errors } = LoginFormContext.useFormState();
-  const { watch } = LoginFormContext.useFormContext();
+  const { Controller } = SignupFormContext;
+  const { handleSubmit } = SignupFormContext.useFormContext();
+  const { errors } = SignupFormContext.useFormState();
+  const { watch } = SignupFormContext.useFormContext();
   const phoneNumber = watch('phone');
 
   const onSubmit = () => {
@@ -28,13 +25,7 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
       <div className={classes['name-wrapper']}>
         <Controller
           name='name'
-          rules={{
-            required: requireFieldMessage,
-            pattern: {
-              value: persianRegex,
-              message: 'نام باید فارسی باشد!',
-            },
-          }}
+          rules={nameRules}
           render={({ field }) => (
             <Input.Wrapper error={errors.name?.message}>
               <TextInput
@@ -50,13 +41,7 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
         />
         <Controller
           name='family'
-          rules={{
-            required: requireFieldMessage,
-            pattern: {
-              value: persianRegex,
-              message: 'نام خانوادگی باید فارسی باشد!',
-            },
-          }}
+          rules={familyRules}
           render={({ field }) => (
             <Input.Wrapper error={errors.family?.message}>
               <TextInput
@@ -73,13 +58,7 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
       </div>
       <Controller
         name='phone'
-        rules={{
-          required: requireFieldMessage,
-          pattern: {
-            value: phoneNumberRegex,
-            message: 'شماره تماس باید با 09 شروع شود!',
-          },
-        }}
+        rules={phoneNumberRule}
         render={({ field }) => (
           <Input.Wrapper error={errors.phone?.message}>
             <TextInput
@@ -105,9 +84,9 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
 
 const FormProvider = ({ onSubmitForm }: SignUpFormProps) => {
   return (
-    <LoginFormProvider>
+    <SignupFormProvider>
       <SignUpForm onSubmitForm={onSubmitForm} />
-    </LoginFormProvider>
+    </SignupFormProvider>
   );
 };
 

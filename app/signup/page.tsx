@@ -2,7 +2,7 @@
 import { SignUpForm } from './form';
 import { Otp } from '@/app/components';
 import { useState } from 'react';
-import { LoginHeader } from '../components/loginHeader';
+import { LoginHeader } from '@/app/components';
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
 

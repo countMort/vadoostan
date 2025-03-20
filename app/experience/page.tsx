@@ -44,14 +44,6 @@ const Experience = () => {
         <div className={classes['carousel']}>
           <Carousel />
         </div>
-        <div>{cookie ?? 'no-cookie'}</div>
-        <button
-          onClick={() => {
-            deleteCookie('token');
-          }}
-        >
-          delete coockie
-        </button>
         <div className={classes['title-wrapper']}>
           <div className={classes['title']}>شبِ خلق: سفالگری با چرخ</div>
           <div className={classes['abbr']}>
