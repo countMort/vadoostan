@@ -17,7 +17,9 @@ const Login = () => {
       setLoginStatus('login');
     }
   };
-  const onVerifyOtp = () => {};
+  const onVerifyOtp = () => {
+    router.push('/experience-list');
+  };
   const onResendOtp = () => {};
   const onSubmitForm = (phoneNumber?: string) => {
     if (phoneNumber) {

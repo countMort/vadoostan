@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist_Mono, Vazirmatn } from 'next/font/google';
+import { Vazirmatn } from 'next/font/google';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import {
@@ -10,10 +10,10 @@ import {
 } from '@mantine/core';
 import classes from './style.module.scss';
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+// const geistMono = Geist_Mono({
+//   variable: '--font-geist-mono',
+//   subsets: ['latin'],
+// });
 
 const vazir = Vazirmatn({
   variable: '--font-vazir',
@@ -42,7 +42,7 @@ export default function RootLayout({
         <head>
           <ColorSchemeScript />
         </head>
-        <body className={`${vazir.variable} ${geistMono.variable}`}>
+        <body className={classes['body']}>
           <MantineProvider theme={theme}>
             <div className={classes['wrapper']}>
               <div className={classes['app']}>{children}</div>

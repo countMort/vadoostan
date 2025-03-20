@@ -31,7 +31,9 @@ export default function Home() {
               <Link href={'/login'}>ورود</Link>
             </Button>
           </div>
-          <div className={classes['list-text']}>لیست تجربه‌ها</div>
+          <div className={classes['list-text']}>
+            <Link href={'/experience-list'}>لیست تجربه‌ها </Link>
+          </div>
         </div>
       </div>
     </div>

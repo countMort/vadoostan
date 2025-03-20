@@ -1,5 +1,5 @@
 import classes from './style.module.scss';
-import { BackIcon } from '../atoms/backIcon';
+import { BackIcon } from '../../atoms';
 
 const LoginHeader = ({
   onBack,

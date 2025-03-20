@@ -1,0 +1,21 @@
+import { ActionButton, FooterActionBarTemplate } from '../../atoms';
+import { Text } from '@mantine/core';
+import classes from './style.module.scss';
+import Link from 'next/link';
+
+const LoginSigninInFooter = () => {
+  return (
+    <FooterActionBarTemplate>
+      <div className={classes['wrapper']}>
+        <ActionButton style={{ width: 160, height: 60 }}>
+          <Link href={'/signup'}>ثبت نام</Link>
+        </ActionButton>
+        <Text className={classes['login']} size='18px' fw={700}>
+          <Link href={'/login'}>ورود</Link>
+        </Text>
+      </div>
+    </FooterActionBarTemplate>
+  );
+};
+
+export { LoginSigninInFooter };

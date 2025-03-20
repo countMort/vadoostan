@@ -5,6 +5,7 @@ import {
   DescriptionArea,
   ExperienceOption,
   Carousel,
+  FooterActionBarTemplate,
 } from '@/app/components';
 import Image from 'next/image';
 
@@ -76,12 +77,14 @@ const Experience = () => {
           />
         </div>
       </div>
-      <div className={classes['action-bar']}>
-        <ActionButton style={{ width: 240, height: 60 }}>
-          ثبت نام در تجربه
-        </ActionButton>
-        <div className={classes['price-action']}>500 هزار تومان</div>
-      </div>
+      <FooterActionBarTemplate>
+        <div className={classes['footer-wrapper']}>
+          <ActionButton style={{ width: 200, height: 60 }}>
+            ثبت نام در تجربه
+          </ActionButton>
+          <div className={classes['price-action']}>500 هزار تومان</div>
+        </div>
+      </FooterActionBarTemplate>
     </div>
   );
 };

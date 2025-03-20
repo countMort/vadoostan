@@ -1,0 +1,26 @@
+.wrapper {
+  padding-block-start: 50px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-block-end: 80px;
+  padding-inline: 20px;
+  background-color: #fbfbfb;
+}
+.title {
+  font-size: 16px;
+  font-weight: 800;
+  margin-block-end: 30px;
+  text-align: center;
+}
+
+.date-filter {
+  height: 45px;
+  width: 100%;
+  background-color: red;
+}
+
+.experience-list-wrapper {
+  overflow-y: auto;
+  flex: 1;
+}

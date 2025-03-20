@@ -21,10 +21,8 @@ const Signup = () => {
   };
 
   const onVerifyOtp = async () => {
-    // const cookie = getCookie('token');
     setCookie('token', 'test-for-cookie-1');
-
-    router.push('/experience');
+    router.push('/experience-list');
   };
 
   const onResendOtp = () => {
