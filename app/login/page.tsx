@@ -2,12 +2,21 @@
 import { LoginHeader, Otp } from '@/app/components';
 import { useState } from 'react';
 import { LoginForm } from './form';
+import { useRouter } from 'next/navigation';
+
 type LoginPageStatus = 'login' | 'otp';
 
 const Login = () => {
+  const router = useRouter();
   const [loginStatus, setLoginStatus] = useState<LoginPageStatus>('login');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
-  const handleOnback = () => {};
+  const handleOnback = () => {
+    if (loginStatus === 'login') {
+      router.back();
+    } else if (loginStatus === 'otp') {
+      setLoginStatus('login');
+    }
+  };
   const onVerifyOtp = () => {};
   const onResendOtp = () => {};
   const onSubmitForm = (phoneNumber?: string) => {
@@ -26,6 +35,7 @@ const Login = () => {
         <LoginForm onSubmitForm={onSubmitForm} />
       ) : (
         <Otp
+          mode='login'
           phoneNumber={phoneNumber}
           onVerify={onVerifyOtp}
           onResend={onResendOtp}

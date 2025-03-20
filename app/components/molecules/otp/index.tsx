@@ -8,9 +8,10 @@ interface OtpProps {
   onVerify?: () => void;
   onResend?: () => void;
   phoneNumber?: string;
+  mode: 'login' | 'signup';
 }
 
-const Otp = ({ onVerify, onResend, phoneNumber = '09123456789' }: OtpProps) => {
+const Otp = ({ onVerify, onResend, phoneNumber, mode }: OtpProps) => {
   const [otp, setOtp] = useState('');
   const [timer, setTimer] = useState(120);
   const [canResend, setCanResend] = useState(false);
@@ -87,7 +88,7 @@ const Otp = ({ onVerify, onResend, phoneNumber = '09123456789' }: OtpProps) => {
       </div>
 
       <ActionButton onClick={handleVerify} disabled={otp.length !== 4}>
-        تایید و ثبت نام
+        {mode === 'login' ? 'تایید و ورود' : 'تایید و ثبت نام'}
       </ActionButton>
     </div>
   );

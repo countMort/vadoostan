@@ -5,11 +5,12 @@
 }
 .title-wrapper {
   position: relative;
+  margin-block-end: 50px;
 }
 .icon {
   position: absolute;
   right: 0;
   cursor: pointer;
   top: 50%;
-  transform: translateY(-50%) rotate(180deg);
+  transform: translateY(-50%);
 }

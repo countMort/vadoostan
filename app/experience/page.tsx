@@ -7,7 +7,6 @@ import {
   Carousel,
 } from '@/app/components';
 import Image from 'next/image';
-import { deleteCookie, getCookie } from 'cookies-next';
 
 const Experience = () => {
   const options = [...new Array(5)].map((_, index) => {
@@ -35,8 +34,6 @@ const Experience = () => {
       </div>
     </div>
   );
-
-  const cookie = getCookie('token');
 
   return (
     <div style={{ height: '100%', position: 'relative' }}>

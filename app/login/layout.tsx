@@ -1,11 +1,8 @@
-import { LogInSignupLayout } from '../components';
-
-const LoginLayout = ({
+import { LogInSignupLayout } from '@/app/components';
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) => {
-  <LogInSignupLayout>{children}</LogInSignupLayout>;
-};
-
-export default LoginLayout;
+}>) {
+  return <LogInSignupLayout>{children}</LogInSignupLayout>;
+}

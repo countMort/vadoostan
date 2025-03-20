@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import classes from './style.module.scss';
+import { BackIcon } from '../atoms/backIcon';
 
 const LoginHeader = ({
   onBack,
@@ -10,15 +10,7 @@ const LoginHeader = ({
 }) => {
   return (
     <div className={classes['title-wrapper']}>
-      <Image
-        onClick={onBack}
-        src='/Vector.svg'
-        alt='backward icon'
-        width={25}
-        height={17}
-        priority
-        className={classes.icon}
-      />
+      <BackIcon onClick={onBack} className={classes.icon} />
       <div className={classes['title']}>{title}</div>
     </div>
   );

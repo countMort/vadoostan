@@ -1,3 +1,4 @@
+'use client';
 import { createFormContext } from '@/app/utils';
 
 export const LoginFormContext = createFormContext<{

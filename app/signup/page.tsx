@@ -35,8 +35,8 @@ const Signup = () => {
   const onBackToSignup = () => {
     if (signUpStatus === 'otp') {
       setSignUpStatus('signup');
-    } else {
-      setSignUpStatus('signup');
+    } else if (signUpStatus === 'signup') {
+      router.back();
     }
   };
 
@@ -50,6 +50,7 @@ const Signup = () => {
         <SignUpForm onSubmitForm={onSubmitForm} />
       ) : (
         <Otp
+          mode='signup'
           phoneNumber={phoneNumber}
           onVerify={onVerifyOtp}
           onResend={onResendOtp}
