@@ -23,10 +23,6 @@
   margin-inline-start: 14px;
   flex: 1;
 }
-.name {
-  font-weight: 900;
-  font-size: 14px;
-}
 .location-time {
   font-weight: 400;
   font-size: 12px;
@@ -34,21 +30,28 @@
 
 .price {
   padding-inline: 8px;
+  padding-block: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fae4d7;
-  color: #ff7118;
+  background-color: colors.$cta-bg;
   border-radius: 5px;
   left: 13px;
   position: absolute;
-  font-size: 12px;
 }
 
 .dot {
-  background-color: #ff7118;
+  background-color: colors.$cta-bg;
   width: 5px;
   height: 5px;
   margin-inline: 8px;
   border-radius: 50%;
+}
+
+.location-wrapper {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  margin-block-start: 10px;
 }

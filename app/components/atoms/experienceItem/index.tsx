@@ -1,3 +1,4 @@
+import { colors } from '@/colors';
 import classes from './style.module.scss';
 import { Text } from '@mantine/core';
 import { redirect, RedirectType } from 'next/navigation';
@@ -24,17 +25,16 @@ const ExperienceItem = ({
       }}
       className={classes['wrapper']}
     >
-      <div className={classes['category']}>{category}</div>
+      <div className={classes['category']}>
+        <Text size='14px' fw={800}>
+          {category}
+        </Text>
+      </div>
       <div className={classes['detail']}>
-        <div className={classes['name']}>{title}</div>
-        <div
-          style={{
-            display: 'flex',
-            position: 'relative',
-            alignItems: 'center',
-            width: '100%',
-          }}
-        >
+        <Text size={'14px'} fw={900}>
+          {title}
+        </Text>
+        <div className={classes['location-wrapper']}>
           <Text size={'12px'} fw={400}>
             {`محله: ${location}`}
           </Text>
@@ -42,7 +42,11 @@ const ExperienceItem = ({
           <Text size={'12px'} fw={400}>
             {`ساعت: ${time}`}
           </Text>
-          <div className={classes['price']}>{price}</div>
+          <div className={classes['price']}>
+            <Text size='12px' c={colors['cta-color']} fw={700}>
+              {price}
+            </Text>
+          </div>
         </div>
       </div>
     </div>

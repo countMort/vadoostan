@@ -7,6 +7,7 @@ import {
   createTheme,
   MantineProvider,
   DirectionProvider,
+  mantineHtmlProps,
 } from '@mantine/core';
 import classes from './style.module.scss';
 
@@ -38,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <DirectionProvider initialDirection='rtl'>
-      <html lang='fa' dir='rtl'>
+      <html lang='fa' dir='rtl' {...mantineHtmlProps}>
         <head>
           <ColorSchemeScript />
         </head>

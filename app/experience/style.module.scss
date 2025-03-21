@@ -30,11 +30,11 @@
   height: 10px;
   border-radius: 50%;
   margin-inline: 13px;
-  background-color: #ff7118;
+  background-color: colors.$cta-color;
 }
 .price {
-  color: #ff7118;
-  background-color: #fae4d7;
+  color: colors.$cta-color;
+  background-color: colors.$cta-bg;
   border-radius: 5px;
   font-weight: 600;
   display: flex;

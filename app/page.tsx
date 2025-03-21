@@ -32,7 +32,7 @@ export default function Home() {
             </Button>
           </div>
           <div className={classes['list-text']}>
-            <Link href={'/experience-list'}>لیست تجربه‌ها </Link>
+            <Link href={'/experience-list'}>لیست تجربه‌ها</Link>
           </div>
         </div>
       </div>

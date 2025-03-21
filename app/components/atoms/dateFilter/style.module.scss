@@ -39,7 +39,8 @@
   align-items: center;
   min-width: 95px;
   height: 100%;
-  font-size: 12px;
-  font-weight: 800;
   flex-direction: column;
+  &--selected {
+    background-color: colors.$cta-bg;
+  }
 }

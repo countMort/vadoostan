@@ -1,6 +1,7 @@
 import { Button, ButtonProps, ElementProps } from '@mantine/core';
 import classNames from 'classnames';
 import classes from './style.module.scss';
+import { colors } from '@/colors';
 
 interface MyTextInputProps
   extends ButtonProps,
@@ -14,7 +15,7 @@ const ActionButton = ({ children, ...rest }: MyTextInputProps) => {
       size='lg'
       fullWidth
       variant='filled'
-      bg={'#FAE4D7'}
+      bg={colors['cta-bg']}
       className={classNames(rest.className, classes['action-button'])}
     >
       {children}
