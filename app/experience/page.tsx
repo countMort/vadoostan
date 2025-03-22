@@ -1,12 +1,6 @@
 'use client';
 import classes from './style.module.scss';
-import {
-  ActionButton,
-  DescriptionArea,
-  ExperienceOption,
-  Carousel,
-  FooterActionBarTemplate,
-} from '@/app/components';
+import { DescriptionArea, ExperienceOption, Carousel } from '@/app/components';
 import Image from 'next/image';
 
 const Experience = () => {
@@ -77,14 +71,14 @@ const Experience = () => {
           />
         </div>
       </div>
-      <FooterActionBarTemplate>
+      {/* <FooterActionBarTemplate>
         <div className={classes['footer-wrapper']}>
           <ActionButton style={{ width: 200, height: 60 }}>
             ثبت نام در تجربه
           </ActionButton>
           <div className={classes['price-action']}>500 هزار تومان</div>
         </div>
-      </FooterActionBarTemplate>
+      </FooterActionBarTemplate> */}
     </div>
   );
 };

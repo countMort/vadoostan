@@ -4,6 +4,9 @@
   align-items: center;
   column-gap: 10px;
   height: 100%;
+  &--authenticate {
+    column-gap: 84px;
+  }
   a {
     all: unset;
   }
@@ -14,4 +17,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.icon-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 4px;
 }
