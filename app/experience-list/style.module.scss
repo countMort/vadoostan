@@ -1,10 +1,8 @@
 .wrapper {
-  padding-block-start: 50px;
   display: flex;
   flex-direction: column;
   height: 100%;
   padding-block-end: 80px;
-  padding-inline: 20px;
   background-color: #fbfbfb;
   position: relative;
 }
@@ -18,6 +16,7 @@
 .experience-list-wrapper {
   overflow-y: auto;
   flex: 1;
+  padding-inline: 20px;
 }
 
 .remove-filter {

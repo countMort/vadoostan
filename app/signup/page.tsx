@@ -41,6 +41,7 @@ const Signup = () => {
   return (
     <>
       <LoginHeader
+        style={{ marginBlockStart: 70, marginBlockEnd: 50 }}
         onBack={onBackToSignup}
         title={signUpStatus === 'signup' ? 'ثبت نام' : 'تایید شماره موبایل'}
       />

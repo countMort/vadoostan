@@ -1,15 +1,7 @@
 'use client';
+import { ExperienceItemProps, ExperienceItemStatus } from '@/sharedTypes.type';
 import moment, { Moment } from 'moment-jalaali';
 import { createContext, useState } from 'react';
-
-export interface ExperienceItemProps {
-  category: string;
-  title: string;
-  location: string;
-  time: string;
-  price: string;
-  isSoldOut: boolean;
-}
 
 interface ExperienceListContextProps {
   onSelectDate: (value: Moment | null) => void;
@@ -43,7 +35,9 @@ export const ExperienceListProvider = ({
           location: 'توحید',
           time: '15:00',
           price: '500 هزارتومان',
-          isSoldOut: index % 3 === 0 ? true : false,
+          status: (index % 3 === 0
+            ? 'soldout'
+            : 'active') as ExperienceItemStatus,
         };
       }),
     };

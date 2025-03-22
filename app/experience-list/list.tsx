@@ -1,13 +1,17 @@
 'use client';
-import { DateFilter, ExperienceItem } from '@/app/components';
+import { DateFilter, ExperienceItem, LoginHeader } from '@/app/components';
 import classes from './style.module.scss';
 import moment, { Moment } from 'moment-jalaali';
 import { Button, Text } from '@mantine/core';
 import { ExperienceListContext } from './provider';
 import { useContext, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 
 export const ExperienceList = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
+
   const { experienceList, onRemoveFilter, selectedDate } = useContext(
     ExperienceListContext
   );
@@ -60,26 +64,28 @@ export const ExperienceList = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <div className={classes['wrapper']}>
-        <Text
-          size={'16px'}
-          fw={800}
-          style={{ marginBlockEnd: 30, textAlign: 'center' }}
-        >
-          تجربه‌ها
-        </Text>
-        <DateFilter />
-        <div className={classes['day-indicator']}>
-          {titleDate ? generateTitleDate(titleDate.day) : ''}
-          {selectedDate ? (
-            <Button
-              bg={'#ee3f56'}
-              onClick={onRemoveFilter}
-              className={classes['remove-filter']}
-              styles={{ label: { width: 64, textAlign: 'center' } }}
-            >
-              حذف فیلتر
-            </Button>
-          ) : null}
+        <div style={{ paddingInline: 20 }}>
+          <LoginHeader
+            style={{ marginBlockEnd: 30, marginBlockStart: 50 }}
+            onBack={() => {
+              router.back();
+            }}
+            title={'تجربه‌ها'}
+          />
+          <DateFilter />
+          <div className={classes['day-indicator']}>
+            {titleDate ? generateTitleDate(titleDate.day) : ''}
+            {selectedDate ? (
+              <Button
+                bg={'#ee3f56'}
+                onClick={onRemoveFilter}
+                className={classes['remove-filter']}
+                styles={{ label: { width: 64, textAlign: 'center' } }}
+              >
+                حذف فیلتر
+              </Button>
+            ) : null}
+          </div>
         </div>
 
         <div
@@ -105,24 +111,9 @@ export const ExperienceList = ({ children }: { children: React.ReactNode }) => {
                     {day.locale('fa').format('jMMMM')}
                   </Text>
                 ) : null}
-                {list.map(
-                  (
-                    { category, location, price, time, title, isSoldOut },
-                    index
-                  ) => {
-                    return (
-                      <ExperienceItem
-                        category={category}
-                        location={location}
-                        price={price}
-                        time={time}
-                        title={title}
-                        key={index}
-                        isSoldOut={isSoldOut}
-                      />
-                    );
-                  }
-                )}
+                {list.map((data, index) => {
+                  return <ExperienceItem key={index} {...data} />;
+                })}
               </div>
             );
           })}

@@ -2,8 +2,8 @@ import { colors } from '@/colors';
 import classes from './style.module.scss';
 import { Text } from '@mantine/core';
 import { redirect, RedirectType } from 'next/navigation';
-import { ExperienceItemProps } from '@/app/experience-list/provider';
 import classNames from 'classnames';
+import { ExperienceItemProps } from '@/sharedTypes.type';
 
 const ExperienceItem = ({
   category,
@@ -11,8 +11,13 @@ const ExperienceItem = ({
   price,
   time,
   title,
-  isSoldOut,
+  status,
 }: ExperienceItemProps) => {
+  const isSoldOut = status === 'soldout';
+  const isActiveHistorical = status === 'active-historial';
+  const isRecentHistorical = status === 'recent-historical';
+  const isActive = status === 'active';
+
   const textColor = isSoldOut ? '#B4B4B4' : '#000000';
 
   const priceTag = (
@@ -31,20 +36,39 @@ const ExperienceItem = ({
     </div>
   );
 
+  const activeHistoricalTag = (
+    <div
+      className={classNames(classes['active-historical-tag'], classes['tag'])}
+    >
+      <Text size='12px' c={'#ffffff'} fw={700}>
+        {'نمایش بلیت'}
+      </Text>
+    </div>
+  );
+
   return (
     <div
       onClick={() => {
-        redirect('/experience', RedirectType.push);
+        if (isActive || isSoldOut) {
+          redirect('/experience', RedirectType.push);
+        }
       }}
-      className={classes['wrapper']}
+      className={classNames(
+        classes['wrapper'],
+        isRecentHistorical && classes['wrapper--recent-historical']
+      )}
     >
       <div
         className={classNames(
           classes['category'],
-          isSoldOut && classes['category--soldout']
+          (isSoldOut || isRecentHistorical) && classes['category--soldout']
         )}
       >
-        <Text c={isSoldOut ? '#ffffff' : '#000000'} size='14px' fw={800}>
+        <Text
+          c={isSoldOut || isRecentHistorical ? '#ffffff' : '#000000'}
+          size='14px'
+          fw={800}
+        >
           {category}
         </Text>
       </div>
@@ -59,14 +83,20 @@ const ExperienceItem = ({
           <div
             className={classNames(
               classes['dot'],
-              isSoldOut && classes['dot--soldout']
+              (isSoldOut || isRecentHistorical) && classes['dot--soldout']
             )}
           />
           <Text c={textColor} size={'12px'} fw={400}>
             {`ساعت: ${time}`}
           </Text>
           <div className={classes['price-wrapper']}>
-            {isSoldOut ? soldoutTag : priceTag}
+            {isSoldOut
+              ? soldoutTag
+              : isActiveHistorical
+                ? activeHistoricalTag
+                : isActive
+                  ? priceTag
+                  : null}
           </div>
         </div>
       </div>

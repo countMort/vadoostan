@@ -6,6 +6,9 @@
   background-color: white;
   align-items: center;
   margin-bottom: 12px;
+  &--recent-historical {
+    opacity: 0.6;
+  }
 }
 
 .category {
@@ -68,4 +71,8 @@
   align-items: center;
   width: 100%;
   margin-block-start: 10px;
+}
+
+.active-historical-tag {
+  background-color: #79ace1;
 }

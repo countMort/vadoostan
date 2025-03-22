@@ -98,3 +98,10 @@
   column-gap: 30px;
   height: 100%;
 }
+
+.back-icon {
+  position: absolute;
+  z-index: 1000;
+  top: 50px;
+  right: 20px;
+}

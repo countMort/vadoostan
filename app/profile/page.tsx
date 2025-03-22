@@ -1,7 +1,8 @@
-import LoginSigninInFooter from '../components/molecules/loginSigninInFooter';
 import { Text } from '@mantine/core';
 import classes from './style.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
+import LoginSigninInFooter from '../components/molecules/loginSigninInFooter';
 
 const ProfilePage = () => {
   return (
@@ -21,17 +22,20 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className={classes['action-wrapper']}>
-          <div className={classes['action-item']}>
-            <Image
-              src={'/past-experience.svg'}
-              width={50}
-              height={50}
-              alt='past-experience'
-            />
-            <Text fw={500} size='14px'>
-              {'تجربیات گذشته'}
-            </Text>
-          </div>
+          <Link href={'/experience-history'}>
+            <div className={classes['action-item']}>
+              <Image
+                src={'/past-experience.svg'}
+                width={50}
+                height={50}
+                alt='past-experience'
+              />
+              <Text fw={500} size='14px'>
+                {'تجربیات گذشته'}
+              </Text>
+            </div>
+          </Link>
+
           <div className={classes['action-item']}>
             <Image
               src={'/support.svg'}

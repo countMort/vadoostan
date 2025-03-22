@@ -3,6 +3,7 @@ import { LoginHeader, Otp } from '@/app/components';
 import { useState } from 'react';
 import { LoginForm } from './form';
 import { useRouter } from 'next/navigation';
+import { setCookie } from 'cookies-next';
 
 type LoginPageStatus = 'login' | 'otp';
 
@@ -18,6 +19,7 @@ const Login = () => {
     }
   };
   const onVerifyOtp = () => {
+    setCookie('token', 'test-for-cookie-1');
     router.push('/experience-list');
   };
   const onResendOtp = () => {};
@@ -30,6 +32,7 @@ const Login = () => {
   return (
     <>
       <LoginHeader
+        style={{ marginBlockStart: 70, marginBlockEnd: 50 }}
         onBack={handleOnback}
         title={loginStatus === 'login' ? 'ورود' : 'تایید شماره موبایل'}
       />

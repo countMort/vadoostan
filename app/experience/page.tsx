@@ -6,10 +6,13 @@ import {
   Carousel,
   FooterActionBarTemplate,
   ActionButton,
+  BackIcon,
 } from '@/app/components';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Experience = () => {
+  const router = useRouter();
   const options = [...new Array(5)].map((_, index) => {
     return (
       <ExperienceOption
@@ -36,8 +39,13 @@ const Experience = () => {
     </div>
   );
 
+  const onBack = () => {
+    router.back();
+  };
+
   return (
     <div style={{ height: '100%', position: 'relative' }}>
+      <BackIcon onClick={onBack} className={classes['back-icon']} />
       <div style={{ paddingBlockEnd: 80 }}>
         <div className={classes['carousel']}>
           <Carousel />

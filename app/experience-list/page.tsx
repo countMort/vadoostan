@@ -1,6 +1,6 @@
-import LoginSigninInFooter from '@/app/components/molecules/loginSigninInFooter';
 import { ExperienceListProvider } from './provider';
 import { ExperienceList } from './list';
+import LoginSigninInFooter from '../components/molecules/loginSigninInFooter';
 
 const Experiences = () => {
   return (
