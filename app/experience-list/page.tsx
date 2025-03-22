@@ -12,7 +12,9 @@ import { useContext, useEffect, useRef, useState } from 'react';
 moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 
 const ExperienceList = () => {
-  const { experienceList, onRemoveFilter } = useContext(ExperienceListContext);
+  const { experienceList, onRemoveFilter, selectedDate } = useContext(
+    ExperienceListContext
+  );
   const [interSectedDateIndex, setInterSectedDateIndex] = useState<
     string | null
   >('0');
@@ -35,13 +37,9 @@ const ExperienceList = () => {
         threshold: 0,
       }
     );
-
-    // Observe each item
     itemRefs.current.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
-
-    // Cleanup: Stop observing when the component unmounts
     return () => {
       if (itemRefs.current) {
         itemRefs.current.forEach((ref) => {
@@ -76,14 +74,16 @@ const ExperienceList = () => {
         <DateFilter />
         <div className={classes['day-indicator']}>
           {titleDate ? generateTitleDate(titleDate.day) : ''}
-          <Button
-            bg={'#ee3f56'}
-            onClick={onRemoveFilter}
-            className={classes['remove-filter']}
-            styles={{ label: { width: 64, textAlign: 'center' } }}
-          >
-            حذف فیلتر
-          </Button>
+          {selectedDate ? (
+            <Button
+              bg={'#ee3f56'}
+              onClick={onRemoveFilter}
+              className={classes['remove-filter']}
+              styles={{ label: { width: 64, textAlign: 'center' } }}
+            >
+              حذف فیلتر
+            </Button>
+          ) : null}
         </div>
 
         <div
@@ -110,7 +110,10 @@ const ExperienceList = () => {
                   </Text>
                 ) : null}
                 {list.map(
-                  ({ category, location, price, time, title }, index) => {
+                  (
+                    { category, location, price, time, title, isSoldOut },
+                    index
+                  ) => {
                     return (
                       <ExperienceItem
                         category={category}
@@ -119,6 +122,7 @@ const ExperienceList = () => {
                         time={time}
                         title={title}
                         key={index}
+                        isSoldOut={isSoldOut}
                       />
                     );
                   }

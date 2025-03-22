@@ -2,18 +2,21 @@
 import moment, { Moment } from 'moment-jalaali';
 import { createContext, useState } from 'react';
 
+export interface ExperienceItemProps {
+  category: string;
+  title: string;
+  location: string;
+  time: string;
+  price: string;
+  isSoldOut: boolean;
+}
+
 interface ExperienceListContextProps {
   onSelectDate: (value: Moment | null) => void;
   selectedDate: Moment | null;
   experienceList: {
     day: moment.Moment;
-    list: {
-      category: string;
-      title: string;
-      location: string;
-      time: string;
-      price: string;
-    }[];
+    list: ExperienceItemProps[];
   }[];
   onRemoveFilter: () => void;
 }
@@ -33,13 +36,14 @@ export const ExperienceListProvider = ({
   const mockExperiences = [...new Array(30)].map((_, index) => {
     return {
       day: today.clone().add(index, 'day'),
-      list: [...new Array(10)].map(() => {
+      list: [...new Array(10)].map((_, index) => {
         return {
           category: 'خلق',
           title: 'جواهرسازی، ساخت گردنبند',
           location: 'توحید',
           time: '15:00',
           price: '500 هزارتومان',
+          isSoldOut: index % 3 === 0 ? true : false,
         };
       }),
     };

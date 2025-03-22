@@ -2,14 +2,8 @@ import { colors } from '@/colors';
 import classes from './style.module.scss';
 import { Text } from '@mantine/core';
 import { redirect, RedirectType } from 'next/navigation';
-
-interface ExperienceItemProps {
-  category: string;
-  title: string;
-  location: string;
-  time: string;
-  price: string;
-}
+import { ExperienceItemProps } from '@/app/experience-list/provider';
+import classNames from 'classnames';
 
 const ExperienceItem = ({
   category,
@@ -17,7 +11,26 @@ const ExperienceItem = ({
   price,
   time,
   title,
+  isSoldOut,
 }: ExperienceItemProps) => {
+  const textColor = isSoldOut ? '#B4B4B4' : '#000000';
+
+  const priceTag = (
+    <div className={classNames(classes['price--tag'], classes['tag'])}>
+      <Text size='12px' c={colors['cta-color']} fw={700}>
+        {price}
+      </Text>
+    </div>
+  );
+
+  const soldoutTag = (
+    <div className={classNames(classes['soldout-tag'], classes['tag'])}>
+      <Text size='12px' c={'#ffffff'} fw={700}>
+        {'تکمیل ظرفیت'}
+      </Text>
+    </div>
+  );
+
   return (
     <div
       onClick={() => {
@@ -25,27 +38,35 @@ const ExperienceItem = ({
       }}
       className={classes['wrapper']}
     >
-      <div className={classes['category']}>
-        <Text size='14px' fw={800}>
+      <div
+        className={classNames(
+          classes['category'],
+          isSoldOut && classes['category--soldout']
+        )}
+      >
+        <Text c={isSoldOut ? '#ffffff' : '#000000'} size='14px' fw={800}>
           {category}
         </Text>
       </div>
       <div className={classes['detail']}>
-        <Text size={'14px'} fw={900}>
+        <Text c={textColor} size={'14px'} fw={900}>
           {title}
         </Text>
         <div className={classes['location-wrapper']}>
-          <Text size={'12px'} fw={400}>
+          <Text c={textColor} size={'12px'} fw={400}>
             {`محله: ${location}`}
           </Text>
-          <div className={classes['dot']} />
-          <Text size={'12px'} fw={400}>
+          <div
+            className={classNames(
+              classes['dot'],
+              isSoldOut && classes['dot--soldout']
+            )}
+          />
+          <Text c={textColor} size={'12px'} fw={400}>
             {`ساعت: ${time}`}
           </Text>
-          <div className={classes['price']}>
-            <Text size='12px' c={colors['cta-color']} fw={700}>
-              {price}
-            </Text>
+          <div className={classes['price-wrapper']}>
+            {isSoldOut ? soldoutTag : priceTag}
           </div>
         </div>
       </div>

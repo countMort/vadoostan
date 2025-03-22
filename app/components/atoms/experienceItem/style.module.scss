@@ -17,6 +17,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  &--soldout {
+    background-color: #cecece;
+  }
 }
 
 .detail {
@@ -27,25 +30,36 @@
   font-weight: 400;
   font-size: 12px;
 }
+.price-wrapper {
+  left: 13px;
+  position: absolute;
+}
 
-.price {
+.tag {
   padding-inline: 8px;
   padding-block: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: colors.$cta-bg;
   border-radius: 5px;
-  left: 13px;
-  position: absolute;
+}
+
+.price--tag {
+  background-color: colors.$cta-bg;
+}
+.soldout-tag {
+  background-color: #ee3f56;
 }
 
 .dot {
-  background-color: colors.$cta-bg;
+  background-color: colors.$cta-color;
   width: 5px;
   height: 5px;
   margin-inline: 8px;
   border-radius: 50%;
+  &--soldout {
+    background-color: #b4b4b4;
+  }
 }
 
 .location-wrapper {
