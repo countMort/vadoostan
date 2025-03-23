@@ -17,9 +17,7 @@ const ExperienceItem = ({
   const isActiveHistorical = status === 'active-historial';
   const isRecentHistorical = status === 'recent-historical';
   const isActive = status === 'active';
-
   const textColor = isSoldOut ? '#B4B4B4' : '#000000';
-
   const priceTag = (
     <div className={classNames(classes['price--tag'], classes['tag'])}>
       <Text size='12px' c={colors['cta-color']} fw={700}>
@@ -38,6 +36,9 @@ const ExperienceItem = ({
 
   const activeHistoricalTag = (
     <div
+      onClick={() => {
+        redirect('/ticket', RedirectType.push);
+      }}
       className={classNames(classes['active-historical-tag'], classes['tag'])}
     >
       <Text size='12px' c={'#ffffff'} fw={700}>
