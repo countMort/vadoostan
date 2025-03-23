@@ -43,6 +43,10 @@ const Experience = () => {
     router.back();
   };
 
+  const onPay = () => {
+    router.push('/invoice');
+  };
+
   return (
     <div style={{ height: '100%', position: 'relative' }}>
       <BackIcon onClick={onBack} className={classes['back-icon']} />
@@ -87,7 +91,7 @@ const Experience = () => {
       </div>
       <FooterActionBarTemplate>
         <div className={classes['footer-wrapper']}>
-          <ActionButton style={{ width: 200, height: 60 }}>
+          <ActionButton onClick={onPay} style={{ width: 200, height: 60 }}>
             ثبت نام در تجربه
           </ActionButton>
           <div className={classes['price-action']}>500 هزار تومان</div>

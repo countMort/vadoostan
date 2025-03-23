@@ -1,0 +1,42 @@
+.wrapper {
+  padding-block-start: 50px;
+  padding-inline: 53px;
+  position: relative;
+}
+
+.detail {
+  height: 100px;
+  background-color: #f3f3f3;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-block-start: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.price-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.final-price {
+  background-color: #f3f3f3;
+  height: 48px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-block-start: 4px;
+  padding-inline: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.pay-invoice {
+  position: fixed;
+  bottom: 16px;
+  left: 0;
+  padding-inline: 53px;
+  width: 100%;
+}

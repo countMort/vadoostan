@@ -2,14 +2,17 @@
 import { Button } from '@mantine/core';
 import { ActionButton, LoginHeader } from '../components';
 import classes from './style.module.scss';
-import { TicketItem } from './ticketInformation';
+import { TicketItem } from './ticketItem';
+import { useRouter } from 'next/navigation';
+
 const Ticket = () => {
+  const router = useRouter();
   return (
     <div className={classes['wrapper']}>
       <LoginHeader
         style={{ marginBlockEnd: 100 }}
-        onBack={function (): void {
-          throw new Error('Function not implemented.');
+        onBack={() => {
+          router.back();
         }}
         title={'بلیت'}
       />
