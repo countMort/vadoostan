@@ -42,6 +42,7 @@
   min-width: 95px;
   height: 100%;
   flex-direction: column;
+  row-gap: 6px;
   &--selected {
     background-color: colors.$cta-bg;
   }
