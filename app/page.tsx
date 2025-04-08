@@ -1,6 +1,6 @@
 import { ActionButton } from '@/app/components';
 import classes from './style.module.scss';
-import { Button } from '@mantine/core';
+import { Button, Text } from '@mantine/core';
 import Link from 'next/link';
 
 export default function Home() {
@@ -9,10 +9,12 @@ export default function Home() {
       <div className={classes['image']}>
         <div className={classes['actions']}>
           <div className={classes['title-wrapper']}>
-            <div className={classes['title']}>وَ دوستان</div>
-            <div className={classes['title']}>
+            <Text size='22px' fw={700} style={{ marginBottom: 8 }}>
+              وَ دوستان
+            </Text>
+            <Text style={{ marginBottom: 18 }} size='22px' fw={700}>
               جایی برای تجربه‌های حال‌‌خوب‌کن
-            </div>
+            </Text>
           </div>
           <div className={classes['buttons']}>
             <ActionButton style={{ width: 160, height: 60 }}>

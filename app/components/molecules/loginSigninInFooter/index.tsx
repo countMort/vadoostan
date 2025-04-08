@@ -3,9 +3,8 @@ import { ActionButton, FooterActionBarTemplate } from '../../atoms';
 import { Text } from '@mantine/core';
 import classes from './style.module.scss';
 import Link from 'next/link';
-import classNames from 'classnames';
 import { cookies } from 'next/headers';
-import { FooterIcon } from './footerIcon';
+import { Authenticate } from './authenticateFooter';
 
 export default async function LoginSigninInFooter() {
   const cookieStore = await cookies();
@@ -22,25 +21,9 @@ export default async function LoginSigninInFooter() {
     </div>
   );
 
-  const authenticated = (
-    <div
-      className={classNames(
-        classes['wrapper'],
-        classes['wrapper--authenticate']
-      )}
-    >
-      <Link href={'/profile'}>
-        <FooterIcon path='/profile' text='پروفایل' />
-      </Link>
-      <Link href={'/experience-list'}>
-        <FooterIcon path='/experience-list' text='تجربه‌ها' />
-      </Link>
-    </div>
-  );
-
   return (
     <FooterActionBarTemplate>
-      {token ? authenticated : unAuthenticated}
+      {token ? <Authenticate /> : unAuthenticated}
     </FooterActionBarTemplate>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Vazirmatn } from 'next/font/google';
+// import { Vazirmatn } from 'next/font/google';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import {
@@ -16,10 +16,10 @@ import classes from './style.module.scss';
 //   subsets: ['latin'],
 // });
 
-const vazir = Vazirmatn({
-  variable: '--font-vazir',
-  subsets: ['arabic'],
-});
+// const vazir = Vazirmatn({
+//   variable: '--font-vazir',
+//   subsets: ['arabic'],
+// });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
 };
 
 const theme = createTheme({
-  fontFamily: vazir.style.fontFamily,
-
-  /** Your theme override here */
+  fontFamily: 'vazir',
+  fontFamilyMonospace: 'vazir',
+  headings: { fontFamily: 'vazir' },
 });
 
 export default function RootLayout({

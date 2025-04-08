@@ -3,7 +3,7 @@
   src: url('/vazir.ttf');
 }
 .body {
-  font-family: 'vazir' !important;
+  font-family: 'vazir';
 }
 .wrapper {
   height: 100vh;
@@ -69,5 +69,6 @@
   font-size: 14px;
   color: #585858;
   margin-top: 20px;
+  cursor: pointer;
   text-align: center;
 }
