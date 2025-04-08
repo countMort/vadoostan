@@ -10,6 +10,7 @@ import {
   mantineHtmlProps,
 } from '@mantine/core';
 import classes from './style.module.scss';
+import './font.css';
 
 // const geistMono = Geist_Mono({
 //   variable: '--font-geist-mono',
