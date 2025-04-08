@@ -74,22 +74,24 @@ const ExperienceItem = ({
         </Text>
       </div>
       <div className={classes['detail']}>
-        <Text c={textColor} size={'14px'} fw={900}>
+        <Text style={{ marginBottom: 8 }} c={textColor} size={'14px'} fw={900}>
           {title}
         </Text>
         <div className={classes['location-wrapper']}>
-          <Text c={textColor} size={'12px'} fw={400}>
-            {`محله: ${location}`}
-          </Text>
-          <div
-            className={classNames(
-              classes['dot'],
-              (isSoldOut || isRecentHistorical) && classes['dot--soldout']
-            )}
-          />
-          <Text c={textColor} size={'12px'} fw={400}>
-            {`ساعت: ${time}`}
-          </Text>
+          <div className={classes['location']}>
+            <Text c={textColor} size={'12px'} fw={400}>
+              {`محله: ${location}`}
+            </Text>
+            <div
+              className={classNames(
+                classes['dot'],
+                (isSoldOut || isRecentHistorical) && classes['dot--soldout']
+              )}
+            />
+            <Text c={textColor} size={'12px'} fw={400}>
+              {`ساعت: ${time}`}
+            </Text>
+          </div>
           <div className={classes['price-wrapper']}>
             {isSoldOut
               ? soldoutTag

@@ -33,10 +33,6 @@
   font-weight: 400;
   font-size: 12px;
 }
-.price-wrapper {
-  left: 13px;
-  position: absolute;
-}
 
 .tag {
   padding-inline: 8px;
@@ -67,12 +63,19 @@
 
 .location-wrapper {
   display: flex;
-  position: relative;
   align-items: center;
-  width: 100%;
-  margin-block-start: 10px;
+  flex-wrap: wrap;
+  padding-inline-end: 13px;
+  justify-content: space-between;
+  row-gap: 8px;
 }
 
 .active-historical-tag {
   background-color: #79ace1;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  flex-basis: 160px;
 }
