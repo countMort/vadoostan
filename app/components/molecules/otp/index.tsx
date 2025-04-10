@@ -69,7 +69,7 @@ const Otp = ({ onVerify, phoneNumber, mode }: OtpProps) => {
         {
           client: 'web',
           mobileNumber: phoneNumber as string,
-          otpCode: '1111',
+          otp: '1111',
         },
         {
           onSuccess() {

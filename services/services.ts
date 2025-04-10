@@ -26,7 +26,7 @@ type SignupResponseProps = Response;
 
 interface OTPverifyRequestProps {
   mobileNumber: string;
-  otpCode: string;
+  otp: string;
   client: ClientType;
 }
 
