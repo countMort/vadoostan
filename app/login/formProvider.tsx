@@ -2,7 +2,7 @@
 import { createFormContext } from '@/app/utils';
 
 export const LoginFormContext = createFormContext<{
-  phone: number | undefined;
+  phone: string | undefined;
 }>({
   phone: undefined,
 });

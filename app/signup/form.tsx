@@ -2,10 +2,11 @@
 import { ActionButton, successToast, TextInput } from '@/app/components';
 import classes from './style.module.scss';
 import { SignupFormContext, SignupFormProvider } from './formProvider';
-import { Input } from '@mantine/core';
+import { Grid, Input } from '@mantine/core';
 import { familyRules, nameRules, phoneNumberRule } from '@/app/utils';
 import { useSignup } from '@/services/services';
 import { errorToast } from '@/app/components';
+import { PersianSupportNumberInput } from '../components/atoms/persianSupportInput';
 
 interface SignUpFormProps {
   onSubmitForm: (phone?: string) => void;
@@ -42,65 +43,70 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
 
   return (
     <>
-      <div className={classes['name-wrapper']}>
-        <Controller
-          name='name'
-          rules={nameRules}
-          render={({ field }) => (
-            <Input.Wrapper error={errors.name?.message}>
-              <TextInput
-                {...field}
-                styles={{
-                  input: {
-                    width: 140,
-                  },
-                  wrapper: {
-                    width: 140,
-                  },
-                }}
-                className={classes['input']}
-                width={150}
-                radius={20}
-                size='lg'
-                placeholder='نام'
-              />
-            </Input.Wrapper>
-          )}
-        />
-        <Controller
-          name='family'
-          rules={familyRules}
-          render={({ field }) => (
-            <Input.Wrapper error={errors.family?.message}>
-              <TextInput
-                {...field}
-                className={classes['input']}
-                radius={20}
-                size='lg'
-                placeholder='نام‌خانوادگی'
-                styles={{
-                  input: {
-                    width: 140,
-                  },
-                  wrapper: {
-                    width: 140,
-                  },
-                }}
-              />
-            </Input.Wrapper>
-          )}
-        />
-      </div>
+      <Grid className={classes['name-wrapper']}>
+        <Grid.Col span={6}>
+          <Controller
+            name='name'
+            rules={nameRules}
+            render={({ field }) => (
+              <Input.Wrapper error={errors.name?.message}>
+                <TextInput
+                  {...field}
+                  styles={{
+                    wrapper: {
+                      width: '100%',
+                    },
+                  }}
+                  className={classes['input']}
+                  width={150}
+                  radius={20}
+                  size='lg'
+                  placeholder='نام'
+                />
+              </Input.Wrapper>
+            )}
+          />
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <Controller
+            name='family'
+            rules={familyRules}
+            render={({ field }) => (
+              <Input.Wrapper error={errors.family?.message}>
+                <TextInput
+                  {...field}
+                  className={classes['input']}
+                  radius={20}
+                  size='lg'
+                  placeholder='نام‌خانوادگی'
+                  styles={{
+                    wrapper: {
+                      width: '100%',
+                    },
+                  }}
+                />
+              </Input.Wrapper>
+            )}
+          />
+        </Grid.Col>
+      </Grid>
       <Controller
         name='phone'
         rules={phoneNumberRule}
         render={({ field }) => (
           <Input.Wrapper error={errors.phone?.message}>
-            <TextInput
+            <PersianSupportNumberInput
               {...field}
-              width={'100%'}
+              onChangeHandler={field.onChange}
+              style={{
+                width: '100%',
+              }}
+              styles={{
+                input: {
+                  backgroundColor: '#f2f2f2',
+                },
+              }}
               radius={20}
-              type='tel'
               size='lg'
               placeholder='شماره تماس'
             />

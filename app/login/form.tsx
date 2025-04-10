@@ -1,8 +1,9 @@
 'use client';
-import { ActionButton, TextInput } from '@/app/components';
+import { ActionButton } from '@/app/components';
 import { LoginFormContext, LoginFormProvider } from './formProvider';
 import { Input } from '@mantine/core';
 import { phoneNumberRule } from '@/app/utils';
+import { PersianSupportNumberInput } from '../components/atoms/persianSupportInput';
 
 interface SignUpFormProps {
   onSubmitForm: (phone?: string) => void;
@@ -27,11 +28,16 @@ const LoginForm = ({ onSubmitForm, isPending }: SignUpFormProps) => {
         rules={phoneNumberRule}
         render={({ field }) => (
           <Input.Wrapper error={errors.phone?.message}>
-            <TextInput
+            <PersianSupportNumberInput
               {...field}
-              width={'100%'}
+              onChangeHandler={field.onChange}
+              style={{ width: '100%' }}
+              styles={{
+                input: {
+                  backgroundColor: '#f2f2f2',
+                },
+              }}
               radius={20}
-              type='tel'
               size='lg'
               placeholder='شماره تماس'
             />
