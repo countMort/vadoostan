@@ -50,8 +50,16 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
             <Input.Wrapper error={errors.name?.message}>
               <TextInput
                 {...field}
+                styles={{
+                  input: {
+                    width: 140,
+                  },
+                  wrapper: {
+                    width: 140,
+                  },
+                }}
                 className={classes['input']}
-                width={160}
+                width={150}
                 radius={20}
                 size='lg'
                 placeholder='نام'
@@ -67,10 +75,17 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
               <TextInput
                 {...field}
                 className={classes['input']}
-                width={160}
                 radius={20}
                 size='lg'
                 placeholder='نام‌خانوادگی'
+                styles={{
+                  input: {
+                    width: 140,
+                  },
+                  wrapper: {
+                    width: 140,
+                  },
+                }}
               />
             </Input.Wrapper>
           )}

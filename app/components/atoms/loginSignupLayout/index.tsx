@@ -6,7 +6,7 @@ export function LogInSignupLayout({
 }>) {
   return (
     <div className={classes['layout-wrapper']}>
-      <div style={{ width: '340px' }}>{children}</div>
+      <div style={{ width: '100%', paddingInline: 40 }}>{children}</div>
     </div>
   );
 }

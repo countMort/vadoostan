@@ -1,5 +1,5 @@
 'use client';
-import { LoginHeader, Otp, successToast } from '@/app/components';
+import { errorToast, LoginHeader, Otp, successToast } from '@/app/components';
 import { useState } from 'react';
 import { LoginForm } from './form';
 import { useRouter } from 'next/navigation';
@@ -35,6 +35,9 @@ const Login = () => {
             setLoginStatus('otp');
             successToast({ message: data.message });
             setPhoneNumber(phoneNumber);
+          },
+          onError(error) {
+            errorToast({ message: error.message });
           },
         }
       );
