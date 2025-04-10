@@ -100,7 +100,7 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
               {...field}
               width={'100%'}
               radius={20}
-              type='number'
+              type='tel'
               size='lg'
               placeholder='شماره تماس'
             />

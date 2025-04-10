@@ -36,6 +36,18 @@
   color: #1e1e1e;
   outline: none;
   border: none;
+  /* Firefox */
+  -moz-appearance: textfield;
+
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Standard (future-proof) */
+  appearance: textfield;
 }
 
 .resend-container {
