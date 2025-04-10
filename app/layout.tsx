@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-// import { Vazirmatn } from 'next/font/google';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import {
@@ -10,17 +9,10 @@ import {
   mantineHtmlProps,
 } from '@mantine/core';
 import classes from './style.module.scss';
-import './font.css';
-
-// const geistMono = Geist_Mono({
-//   variable: '--font-geist-mono',
-//   subsets: ['latin'],
-// });
-
-// const vazir = Vazirmatn({
-//   variable: '--font-vazir',
-//   subsets: ['arabic'],
-// });
+import './font.module.scss';
+import Providers from '@/services/provider';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -45,35 +37,16 @@ export default function RootLayout({
           <ColorSchemeScript />
         </head>
         <body className={classes['body']}>
-          <MantineProvider theme={theme}>
-            <div className={classes['wrapper']}>
-              <div className={classes['app']}>{children}</div>
-            </div>
-          </MantineProvider>
+          <ToastContainer />
+          <Providers>
+            <MantineProvider theme={theme}>
+              <div className={classes['wrapper']}>
+                <div className={classes['app']}>{children}</div>
+              </div>
+            </MantineProvider>
+          </Providers>
         </body>
       </html>
     </DirectionProvider>
   );
 }
-
-// import classes from './style.module.scss';
-// export default function RootLayout({
-//   children,
-// }: Readonly<{
-//   children: React.ReactNode;
-// }>) {
-//   return (
-//     <div className={classes['layout-wrapper']}>
-//       <div
-//         style={{
-//           width: '440px',
-//           height: '100%',
-//           display: 'flex',
-//           flexDirection: 'column',
-//         }}
-//       >
-//         {children}
-//       </div>
-//     </div>
-//   );
-// }

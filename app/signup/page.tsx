@@ -20,14 +20,9 @@ const Signup = () => {
     setSignUpStatus('otp');
   };
 
-  const onVerifyOtp = async () => {
-    setCookie('token', 'test-for-cookie-1');
+  const onVerifyOtp = async (token: string) => {
+    setCookie('token', token);
     router.push('/experience-list');
-  };
-
-  const onResendOtp = () => {
-    // Handle OTP resend logic here
-    console.log('OTP resent');
   };
 
   const onBackToSignup = () => {
@@ -48,12 +43,7 @@ const Signup = () => {
       {signUpStatus === 'signup' ? (
         <SignUpForm onSubmitForm={onSubmitForm} />
       ) : (
-        <Otp
-          mode='signup'
-          phoneNumber={phoneNumber}
-          onVerify={onVerifyOtp}
-          onResend={onResendOtp}
-        />
+        <Otp mode='signup' phoneNumber={phoneNumber} onVerify={onVerifyOtp} />
       )}
     </>
   );

@@ -1,21 +1,26 @@
 'use client';
 import { useState, useEffect } from 'react';
 import OtpInput from 'react-otp-input';
-import { ActionButton } from '@/app/components';
+import { ActionButton, errorToast, successToast } from '@/app/components';
 import classes from './style.module.scss';
+import { useLogin, useVerifyOtp } from '@/services/services';
 
 interface OtpProps {
-  onVerify?: () => void;
-  onResend?: () => void;
+  onVerify?: (token: string) => void;
+  // onResend?: () => void;
   phoneNumber?: string;
   mode: 'login' | 'signup';
 }
 
-const Otp = ({ onVerify, onResend, phoneNumber, mode }: OtpProps) => {
+const Otp = ({ onVerify, phoneNumber, mode }: OtpProps) => {
   const [otp, setOtp] = useState('');
   const [timer, setTimer] = useState(120);
   const [canResend, setCanResend] = useState(false);
   const [isCodeInValid] = useState(false);
+
+  const { mutate: onSendOTP, isPending } = useVerifyOtp();
+
+  const { mutate: onLogin, isPending: isPendingLogin } = useLogin();
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -41,15 +46,40 @@ const Otp = ({ onVerify, onResend, phoneNumber, mode }: OtpProps) => {
 
   const handleResend = () => {
     if (canResend) {
-      setTimer(120);
-      setCanResend(false);
-      onResend?.();
+      onLogin(
+        { client: 'web', mobileNumber: phoneNumber as string },
+        {
+          onSuccess: ({ message }) => {
+            successToast({ message: message });
+            setTimer(120);
+            setCanResend(false);
+          },
+          onError: ({ message }) => {
+            errorToast({ message });
+          },
+        }
+      );
+      // onResend?.();
     }
   };
 
   const handleVerify = () => {
     if (otp.length === 4) {
-      onVerify?.();
+      onSendOTP(
+        {
+          client: 'web',
+          mobileNumber: phoneNumber as string,
+          otpCode: '1111',
+        },
+        {
+          onSuccess() {
+            onVerify?.('token');
+          },
+          onError(error) {
+            errorToast({ message: error.message });
+          },
+        }
+      );
     }
   };
 
@@ -78,7 +108,9 @@ const Otp = ({ onVerify, onResend, phoneNumber, mode }: OtpProps) => {
             دریافت مجدد کد
           </div>
         ) : isCodeInValid ? (
-          <div className={classes['invalid-text']}>کد نامعتیر</div>
+          <div onClick={handleResend} className={classes['invalid-text']}>
+            کد نامعتیر
+          </div>
         ) : (
           <>
             <span className={classes['resend-text']}>دریافت مجدد کد:</span>
@@ -87,7 +119,11 @@ const Otp = ({ onVerify, onResend, phoneNumber, mode }: OtpProps) => {
         )}
       </div>
 
-      <ActionButton onClick={handleVerify} disabled={otp.length !== 4}>
+      <ActionButton
+        loading={isPending || isPendingLogin}
+        onClick={handleVerify}
+        disabled={otp.length !== 4}
+      >
         {mode === 'login' ? 'تایید و ورود' : 'تایید و ثبت نام'}
       </ActionButton>
     </div>

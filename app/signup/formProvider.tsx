@@ -3,7 +3,7 @@ import { createFormContext } from '@/app/utils';
 export const SignupFormContext = createFormContext<{
   name: string;
   family: string;
-  phone: number | undefined;
+  phone: string | undefined;
 }>({
   name: '',
   family: '',

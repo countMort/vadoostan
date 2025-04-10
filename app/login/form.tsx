@@ -6,9 +6,10 @@ import { phoneNumberRule } from '@/app/utils';
 
 interface SignUpFormProps {
   onSubmitForm: (phone?: string) => void;
+  isPending: boolean;
 }
 
-const LoginForm = ({ onSubmitForm }: SignUpFormProps) => {
+const LoginForm = ({ onSubmitForm, isPending }: SignUpFormProps) => {
   const { Controller } = LoginFormContext;
   const { handleSubmit } = LoginFormContext.useFormContext();
   const { errors } = LoginFormContext.useFormState();
@@ -38,6 +39,7 @@ const LoginForm = ({ onSubmitForm }: SignUpFormProps) => {
         )}
       />
       <ActionButton
+        loading={isPending}
         onClick={handleSubmit(onSubmit)}
         style={{ marginBlockStart: 16 }}
       >
@@ -47,10 +49,10 @@ const LoginForm = ({ onSubmitForm }: SignUpFormProps) => {
   );
 };
 
-const FormProvider = ({ onSubmitForm }: SignUpFormProps) => {
+const FormProvider = ({ onSubmitForm, isPending }: SignUpFormProps) => {
   return (
     <LoginFormProvider>
-      <LoginForm onSubmitForm={onSubmitForm} />
+      <LoginForm onSubmitForm={onSubmitForm} isPending={isPending} />
     </LoginFormProvider>
   );
 };

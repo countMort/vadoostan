@@ -1,9 +1,10 @@
 'use client';
-import { LoginHeader, Otp } from '@/app/components';
+import { LoginHeader, Otp, successToast } from '@/app/components';
 import { useState } from 'react';
 import { LoginForm } from './form';
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
+import { useLogin } from '@/services/services';
 
 type LoginPageStatus = 'login' | 'otp';
 
@@ -11,6 +12,9 @@ const Login = () => {
   const router = useRouter();
   const [loginStatus, setLoginStatus] = useState<LoginPageStatus>('login');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+
+  const { mutate: onLogin, isPending } = useLogin();
+
   const handleOnback = () => {
     if (loginStatus === 'login') {
       router.back();
@@ -22,12 +26,19 @@ const Login = () => {
     setCookie('token', 'test-for-cookie-1');
     router.push('/experience-list');
   };
-  const onResendOtp = () => {};
   const onSubmitForm = (phoneNumber?: string) => {
     if (phoneNumber) {
-      setPhoneNumber(phoneNumber);
+      onLogin(
+        { client: 'web', mobileNumber: phoneNumber },
+        {
+          onSuccess(data) {
+            setLoginStatus('otp');
+            successToast({ message: data.message });
+            setPhoneNumber(phoneNumber);
+          },
+        }
+      );
     }
-    setLoginStatus('otp');
   };
   return (
     <>
@@ -37,14 +48,9 @@ const Login = () => {
         title={loginStatus === 'login' ? 'ورود' : 'تایید شماره موبایل'}
       />
       {loginStatus === 'login' ? (
-        <LoginForm onSubmitForm={onSubmitForm} />
+        <LoginForm isPending={isPending} onSubmitForm={onSubmitForm} />
       ) : (
-        <Otp
-          mode='login'
-          phoneNumber={phoneNumber}
-          onVerify={onVerifyOtp}
-          onResend={onResendOtp}
-        />
+        <Otp mode='login' phoneNumber={phoneNumber} onVerify={onVerifyOtp} />
       )}
     </>
   );

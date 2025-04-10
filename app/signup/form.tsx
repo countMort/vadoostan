@@ -1,9 +1,11 @@
 'use client';
-import { ActionButton, TextInput } from '@/app/components';
+import { ActionButton, successToast, TextInput } from '@/app/components';
 import classes from './style.module.scss';
 import { SignupFormContext, SignupFormProvider } from './formProvider';
 import { Input } from '@mantine/core';
 import { familyRules, nameRules, phoneNumberRule } from '@/app/utils';
+import { useSignup } from '@/services/services';
+import { errorToast } from '@/app/components';
 
 interface SignUpFormProps {
   onSubmitForm: (phone?: string) => void;
@@ -13,11 +15,29 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
   const { Controller } = SignupFormContext;
   const { handleSubmit } = SignupFormContext.useFormContext();
   const { errors } = SignupFormContext.useFormState();
-  const { watch } = SignupFormContext.useFormContext();
+  const { watch, getValues } = SignupFormContext.useFormContext();
   const phoneNumber = watch('phone');
+  const { mutate: onSignup, isPending } = useSignup();
 
   const onSubmit = () => {
-    onSubmitForm(phoneNumber?.toString());
+    const { family, name, phone } = getValues();
+    onSignup(
+      {
+        client: 'web',
+        firstName: name,
+        lastName: family,
+        mobileNumber: phone as string,
+      },
+      {
+        onSuccess() {
+          successToast({ message: 'کد ارسال شد!' });
+          onSubmitForm(phoneNumber?.toString());
+        },
+        onError(error) {
+          errorToast({ message: error.message });
+        },
+      }
+    );
   };
 
   return (
@@ -73,6 +93,7 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
         )}
       />
       <ActionButton
+        loading={isPending}
         onClick={handleSubmit(onSubmit)}
         className={classes['button']}
       >
