@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-block-end: 100px;
+  background-color: #fbfbfb;
+  position: relative;
+}
+
+.form {
+  overflow-y: auto;
+  flex: 1;
+  padding-inline: 20px;
+}
+.date-input {
+  height: 36px;
+  background-color: #f2f2f2;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  width: 100%;
+}

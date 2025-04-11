@@ -9,3 +9,4 @@ export * from './footerActionBarTemplate';
 export * from './dateFilter';
 export * from './experienceItem';
 export * from './toast';
+export * from './imageUploader';

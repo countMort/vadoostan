@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import '@mantine/core/styles.css';
-import '@mantine/carousel/styles.css';
 import {
   ColorSchemeScript,
   createTheme,

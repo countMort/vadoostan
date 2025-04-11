@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 
-export const ExperienceList = ({ children }: { children: React.ReactNode }) => {
+export const ExperienceList = ({ footer }: { footer: React.ReactNode }) => {
   const router = useRouter();
 
   const { experienceList, onRemoveFilter, selectedDate } = useContext(
@@ -87,7 +87,6 @@ export const ExperienceList = ({ children }: { children: React.ReactNode }) => {
             ) : null}
           </div>
         </div>
-
         <div
           ref={rootObserverElement}
           className={classes['experience-list-wrapper']}
@@ -119,7 +118,7 @@ export const ExperienceList = ({ children }: { children: React.ReactNode }) => {
           })}
         </div>
       </div>
-      {children}
+      {footer}
     </>
   );
 };

@@ -5,9 +5,7 @@ import LoginSigninInFooter from '../components/molecules/loginSigninInFooter';
 const Experiences = () => {
   return (
     <ExperienceListProvider>
-      <ExperienceList>
-        <LoginSigninInFooter />
-      </ExperienceList>
+      <ExperienceList footer={<LoginSigninInFooter />} />
     </ExperienceListProvider>
   );
 };
