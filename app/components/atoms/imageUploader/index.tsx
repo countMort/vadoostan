@@ -1,3 +1,4 @@
+'use client';
 import { Button, Image, Text } from '@mantine/core';
 import classes from './style.module.scss';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
