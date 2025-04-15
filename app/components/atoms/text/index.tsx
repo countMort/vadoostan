@@ -20,12 +20,12 @@ export const Text = ({
   return (
     <div
       style={{
-        ...style,
         display: 'inline-block',
         fontWeight: fw,
         fontSize: size,
         color: c,
         lineHeight: lineHeight ?? 1,
+        ...style,
       }}
       className={className}
     >
