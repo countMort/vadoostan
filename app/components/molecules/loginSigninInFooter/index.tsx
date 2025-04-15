@@ -1,6 +1,6 @@
 'use server';
 import { ActionButton, FooterActionBarTemplate } from '../../atoms';
-import { Text } from '@mantine/core';
+import { Text } from '@/app/components';
 import classes from './style.module.scss';
 import Link from 'next/link';
 import { cookies } from 'next/headers';

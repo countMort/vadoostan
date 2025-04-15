@@ -1,6 +1,6 @@
-import { ActionButton } from '@/app/components';
+import { ActionButton, Text } from '@/app/components';
 import classes from './style.module.scss';
-import { Button, Text } from '@mantine/core';
+import { Button } from '@mantine/core';
 import Link from 'next/link';
 
 export default function Home() {

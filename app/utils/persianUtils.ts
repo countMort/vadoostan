@@ -11,8 +11,6 @@ const toEnglishNumbers = (str: string) => {
     output = output.split(item).join(index.toString());
   });
 
-  console.log({ output });
-
   return output;
 };
 

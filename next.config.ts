@@ -9,19 +9,9 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/auth/signup', // Your local proxy endpoint
+        source: '/api/:path*', // Your local proxy endpoint
         destination:
-          'https://cute-crayfish-currently.ngrok-free.app/auth/signup', // Target URL
-      },
-      {
-        source: '/auth/login', // Your local proxy endpoint
-        destination:
-          'https://cute-crayfish-currently.ngrok-free.app/auth/login', // Target URL
-      },
-      {
-        source: '/auth/verify-otp', // Your local proxy endpoint
-        destination:
-          'https://cute-crayfish-currently.ngrok-free.app/auth/verify-otp', // Target URL
+          'https://cute-crayfish-currently.ngrok-free.app/api/:path*', // Target URL
       },
     ];
   },

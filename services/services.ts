@@ -1,8 +1,27 @@
 // hooks/useUsers.ts
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { getAxiosInstance } from './apiClient';
 
 type ClientType = 'web' | 'telegram';
+
+type ExperienceStatus = 'PUBLISHED';
+
+export interface Experience {
+  id: string;
+  title: string;
+  category: string;
+  price: number;
+  date: string;
+  address: string;
+  isFilled: boolean;
+}
+
+interface ExperiencesListResponce extends Response {
+  result: {
+    count: number;
+    exps: Experience[];
+  };
+}
 
 interface Response {
   isSuccessful: boolean;
@@ -37,20 +56,32 @@ interface OTPverifyResponseProps extends Response {
 const verifyOtp = async (
   args: OTPverifyRequestProps
 ): Promise<OTPverifyResponseProps> => {
-  const { data } = await getAxiosInstance().post('/auth/verify-otp', args);
+  const { data } = await getAxiosInstance().post('/api/auth/verify-otp', args);
   return data;
 };
 
 const fetchUsers = async (
   args: SignupRequestProps
 ): Promise<SignupResponseProps> => {
-  const { data } = await getAxiosInstance().post('/auth/signup', args);
+  const { data } = await getAxiosInstance().post('/api/auth/signup', args);
   return data;
 };
 
 const login = async (args: LoginRequestProps): Promise<Response> => {
-  const { data } = await getAxiosInstance().post('/auth/login', args);
-  console.log({ data });
+  const { data } = await getAxiosInstance().post('/api/auth/login', args);
+  return data;
+};
+
+const getExpList = async ({
+  status,
+}: {
+  status: ExperienceStatus;
+}): Promise<ExperiencesListResponce> => {
+  const { data } = await getAxiosInstance().get('/api/experiences', {
+    params: {
+      status,
+    },
+  });
   return data;
 };
 
@@ -69,5 +100,12 @@ export function useVerifyOtp() {
 export function useLogin() {
   return useMutation({
     mutationFn: login,
+  });
+}
+
+export function useGetExperienceList({ status }: { status: ExperienceStatus }) {
+  return useQuery({
+    queryKey: ['experiences', status],
+    queryFn: () => getExpList({ status }),
   });
 }

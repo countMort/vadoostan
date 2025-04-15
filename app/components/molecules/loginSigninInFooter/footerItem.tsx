@@ -1,6 +1,6 @@
 'use client';
 import { colors } from '@/colors';
-import { Text } from '@mantine/core';
+import { Text } from '@/app/components';
 import classes from './style.module.scss';
 
 const FooterItem = ({

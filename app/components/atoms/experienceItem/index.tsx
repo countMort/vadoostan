@@ -1,18 +1,24 @@
 import { colors } from '@/colors';
 import classes from './style.module.scss';
-import { Text } from '@mantine/core';
+import { Text } from '@/app/components';
 import { redirect, RedirectType } from 'next/navigation';
 import classNames from 'classnames';
-import { ExperienceItemProps } from '@/sharedTypes.type';
+import { ExperienceItemStatus } from '@/sharedTypes.type';
+import { Experience } from '@/services/services';
+import moment from 'moment-jalaali';
+
+interface ExperienceItem extends Omit<Experience, 'isFilled'> {
+  status: ExperienceItemStatus;
+}
 
 const ExperienceItem = ({
   category,
-  location,
   price,
-  time,
   title,
+  address,
+  date,
   status,
-}: ExperienceItemProps) => {
+}: ExperienceItem) => {
   const isSoldOut = status === 'soldout';
   const isActiveHistorical = status === 'active-historial';
   const isRecentHistorical = status === 'recent-historical';
@@ -21,10 +27,12 @@ const ExperienceItem = ({
   const priceTag = (
     <div className={classNames(classes['price--tag'], classes['tag'])}>
       <Text size='12px' c={colors['cta-color']} fw={700}>
-        {price}
+        {`${price / 1000} هزار تومان`}
       </Text>
     </div>
   );
+
+  const time = moment(date).format('HH:mm');
 
   const soldoutTag = (
     <div className={classNames(classes['soldout-tag'], classes['tag'])}>
@@ -80,7 +88,7 @@ const ExperienceItem = ({
         <div className={classes['location-wrapper']}>
           <div className={classes['location']}>
             <Text c={textColor} size={'12px'} fw={400}>
-              {`محله: ${location}`}
+              {`محله: ${address}`}
             </Text>
             <div
               className={classNames(

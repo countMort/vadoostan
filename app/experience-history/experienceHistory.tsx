@@ -26,7 +26,7 @@ const ExperienceHistory = ({ footer }: { footer: React.ReactNode }) => {
           category: 'خلق',
           title: 'جواهرسازی، ساخت گردنبند',
           location: 'توحید',
-          time: '15:00',
+          time: '2025-04-25T10:00:00.000Z',
           price: '500 هزارتومان',
           status: 'active-historial' as ExperienceItemStatus,
         };
@@ -38,7 +38,7 @@ const ExperienceHistory = ({ footer }: { footer: React.ReactNode }) => {
           category: 'خلق',
           title: 'جواهرسازی، ساخت گردنبند',
           location: 'توحید',
-          time: '15:00',
+          time: '2025-04-28T12:00:00.000Z',
           price: '500 هزارتومان',
           status: 'recent-historical' as ExperienceItemStatus,
         };
@@ -124,7 +124,18 @@ const ExperienceHistory = ({ footer }: { footer: React.ReactNode }) => {
                 </Text>
               ) : null}
               {list.map((data, index) => {
-                return <ExperienceItem key={index} {...data} />;
+                return (
+                  <ExperienceItem
+                    key={index}
+                    address='رحیم خان'
+                    category='سگ'
+                    date={data.time}
+                    id={String(index)}
+                    price={400000}
+                    status='active-historial'
+                    title='گربه'
+                  />
+                );
               })}
             </div>
           );
