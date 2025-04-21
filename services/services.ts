@@ -53,6 +53,33 @@ interface OTPverifyResponseProps extends Response {
   errorCode: number;
 }
 
+interface ExperienceDetailResponse extends Response {
+  result: {
+    title: string;
+    description: {
+      main: string;
+    };
+    date: string;
+    address: string;
+    price: number;
+    directors: [
+      {
+        name: string;
+        bio: string;
+        photoUrl: string;
+      },
+    ];
+    expPhotos: string[];
+    faqs: [
+      {
+        question: string;
+        answer: string;
+      },
+    ];
+    inclusions: string[];
+  };
+}
+
 const verifyOtp = async (
   args: OTPverifyRequestProps
 ): Promise<OTPverifyResponseProps> => {
@@ -84,6 +111,22 @@ const getExpList = async ({
   });
   return data;
 };
+
+const getExperienceDetail = async ({
+  id,
+}: {
+  id: string;
+}): Promise<ExperienceDetailResponse> => {
+  const { data } = await getAxiosInstance().get(`/api/experiences/${id}`);
+  return data;
+};
+
+export function useGetExperienceDetail({ id }: { id: string }) {
+  return useQuery({
+    queryKey: ['experience', id],
+    queryFn: () => getExperienceDetail({ id }),
+  });
+}
 
 export function useSignup() {
   return useMutation({

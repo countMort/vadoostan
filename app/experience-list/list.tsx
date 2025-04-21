@@ -1,6 +1,7 @@
 'use client';
 import {
   DateFilter,
+  ErrorView,
   ExperienceItem,
   LoginHeader,
   Text,
@@ -62,7 +63,11 @@ export const ExperienceList = ({ footer }: { footer: React.ReactNode }) => {
     );
   };
 
-  const { data, isLoading } = useGetExperienceList({ status: 'PUBLISHED' });
+  const { data, isLoading, isError, refetch, error, isFetching } =
+    useGetExperienceList({
+      status: 'PUBLISHED',
+    });
+
   const expList = data?.result.exps;
   const groupedByDate = _.groupBy(expList, (item) => item.date.split('T')[0]);
   const titleDate =
@@ -88,7 +93,13 @@ export const ExperienceList = ({ footer }: { footer: React.ReactNode }) => {
           }}
           title={'تجربه‌ها'}
         />
-        {isLoading ? (
+        {isError ? (
+          <ErrorView
+            isFetching={isFetching}
+            refetch={refetch}
+            text={error.message}
+          />
+        ) : isLoading ? (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Loader color={colors['cta-color']} />
           </div>

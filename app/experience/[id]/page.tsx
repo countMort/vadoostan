@@ -1,4 +1,5 @@
 'use client';
+import { useGetExperienceDetail } from '@/services/services';
 import classes from './style.module.scss';
 import {
   DescriptionArea,
@@ -10,8 +11,17 @@ import {
 } from '@/app/components';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 
-const Experience = () => {
+export default function Experience({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = React.use(params);
+
+  const {} = useGetExperienceDetail({ id });
+
   const router = useRouter();
   const options = [...new Array(5)].map((_, index) => {
     return (
@@ -49,6 +59,7 @@ const Experience = () => {
 
   return (
     <div style={{ height: '100%', position: 'relative' }}>
+      {/* {isLoading ? } */}
       <BackIcon onClick={onBack} className={classes['back-icon']} />
       <div style={{ paddingBlockEnd: 80 }}>
         <div className={classes['carousel']}>
@@ -100,6 +111,4 @@ const Experience = () => {
       </FooterActionBarTemplate>
     </div>
   );
-};
-
-export default Experience;
+}

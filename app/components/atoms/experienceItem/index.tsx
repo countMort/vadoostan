@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { ExperienceItemStatus } from '@/sharedTypes.type';
 import { Experience } from '@/services/services';
 import moment from 'moment-jalaali';
+import { categoryLookup } from '@/app/utils/categoryLookup';
 
 interface ExperienceItem extends Omit<Experience, 'isFilled'> {
   status: ExperienceItemStatus;
@@ -18,12 +19,14 @@ const ExperienceItem = ({
   address,
   date,
   status,
+  id,
 }: ExperienceItem) => {
   const isSoldOut = status === 'soldout';
   const isActiveHistorical = status === 'active-historial';
   const isRecentHistorical = status === 'recent-historical';
   const isActive = status === 'active';
   const textColor = isSoldOut ? '#B4B4B4' : '#000000';
+
   const priceTag = (
     <div className={classNames(classes['price--tag'], classes['tag'])}>
       <Text size='12px' c={colors['cta-color']} fw={700}>
@@ -59,7 +62,7 @@ const ExperienceItem = ({
     <div
       onClick={() => {
         if (isActive || isSoldOut) {
-          redirect('/experience', RedirectType.push);
+          redirect(`/experience/${id}`, RedirectType.push);
         }
       }}
       className={classNames(
@@ -68,17 +71,20 @@ const ExperienceItem = ({
       )}
     >
       <div
-        className={classNames(
-          classes['category'],
-          (isSoldOut || isRecentHistorical) && classes['category--soldout']
-        )}
+        style={{
+          backgroundColor:
+            isSoldOut || isRecentHistorical
+              ? '#cecece'
+              : categoryLookup[category].color,
+        }}
+        className={classes['category']}
       >
         <Text
           c={isSoldOut || isRecentHistorical ? '#ffffff' : '#000000'}
           size='14px'
           fw={800}
         >
-          {category}
+          {categoryLookup[category].persian}
         </Text>
       </div>
       <div className={classes['detail']}>
