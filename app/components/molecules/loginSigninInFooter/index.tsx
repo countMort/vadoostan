@@ -20,6 +20,7 @@ export default async function LoginSigninInFooter() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          cursor: 'pointer',
         }}
         className={classes['login']}
         size='18px'

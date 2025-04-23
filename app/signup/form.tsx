@@ -2,11 +2,12 @@
 import { ActionButton, successToast, TextInput } from '@/app/components';
 import classes from './style.module.scss';
 import { SignupFormContext, SignupFormProvider } from './formProvider';
-import { Grid, Input } from '@mantine/core';
+import { Checkbox, Grid, Input } from '@mantine/core';
 import { familyRules, nameRules, phoneNumberRule } from '@/app/utils';
 import { useSignup } from '@/services/services';
 import { errorToast } from '@/app/components';
-import { PersianSupportNumberInput } from '../components/atoms/persianSupportInput';
+// import { PersianSupportNumberInput } from '../components/atoms/persianSupportInput';
+import classNames from 'classnames';
 
 interface SignUpFormProps {
   onSubmitForm: (phone?: string) => void;
@@ -16,8 +17,7 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
   const { Controller } = SignupFormContext;
   const { handleSubmit } = SignupFormContext.useFormContext();
   const { errors } = SignupFormContext.useFormState();
-  const { watch, getValues } = SignupFormContext.useFormContext();
-  const phoneNumber = watch('phone');
+  const { getValues } = SignupFormContext.useFormContext();
   const { mutate: onSignup, isPending } = useSignup();
 
   const onSubmit = () => {
@@ -32,13 +32,21 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
       {
         onSuccess() {
           successToast({ message: 'کد ارسال شد!' });
-          onSubmitForm(phoneNumber?.toString());
+
+          onSubmitForm(getValues('phone')?.toString());
         },
         onError(error) {
           errorToast({ message: error.message });
         },
       }
     );
+  };
+
+  const inputWrapperErrorStyle = {
+    marginTop: 10,
+    fontSize: 14,
+    fontWeight: 600,
+    color: '#EE3F56',
   };
 
   return (
@@ -49,7 +57,12 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
             name='name'
             rules={nameRules}
             render={({ field }) => (
-              <Input.Wrapper error={errors.name?.message}>
+              <Input.Wrapper
+                styles={{
+                  error: inputWrapperErrorStyle,
+                }}
+                error={errors.name?.message}
+              >
                 <TextInput
                   {...field}
                   styles={{
@@ -72,7 +85,10 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
             name='family'
             rules={familyRules}
             render={({ field }) => (
-              <Input.Wrapper error={errors.family?.message}>
+              <Input.Wrapper
+                styles={{ error: inputWrapperErrorStyle }}
+                error={errors.family?.message}
+              >
                 <TextInput
                   {...field}
                   className={classes['input']}
@@ -94,10 +110,20 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
         name='phone'
         rules={phoneNumberRule}
         render={({ field }) => (
-          <Input.Wrapper error={errors.phone?.message}>
-            <PersianSupportNumberInput
-              {...field}
-              onChangeHandler={field.onChange}
+          <Input.Wrapper
+            styles={{
+              error: inputWrapperErrorStyle,
+            }}
+            error={errors.phone?.message}
+          >
+            <TextInput
+              onChange={(e) => {
+                console.log(field.value);
+                if (e.target.value.length <= 11) {
+                  field.onChange(e);
+                }
+              }}
+              value={field.value}
               style={{
                 width: '100%',
               }}
@@ -113,6 +139,43 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
           </Input.Wrapper>
         )}
       />
+      <div className={classes['age-confirm']}>
+        <Controller
+          rules={{
+            validate: (value) => {
+              if (!value) return 'fail';
+              else return false;
+            },
+          }}
+          name='ageConfirm'
+          render={({ field: { onChange, value } }) => {
+            return (
+              <Checkbox
+                styles={{
+                  input: {
+                    ...(errors.ageConfirm?.message && {
+                      border: '1px solid #ee3f56',
+                    }),
+                  },
+                }}
+                checked={value}
+                onChange={(e) => {
+                  onChange(e.target.checked);
+                }}
+              />
+            );
+          }}
+        />
+
+        <div
+          className={classNames(
+            classes['age-confirm-text'],
+            errors.ageConfirm?.message && classes['age-confirm-text--error']
+          )}
+        >
+          تایید می‌کنم که حداقل 18 سال سن دارم
+        </div>
+      </div>
       <ActionButton
         loading={isPending}
         onClick={handleSubmit(onSubmit)}

@@ -23,7 +23,7 @@ const ExperienceHistory = ({ footer }: { footer: React.ReactNode }) => {
       name: 'تجربیات فعال',
       list: [...new Array(30)].map(() => {
         return {
-          category: 'خلق',
+          category: 'music',
           title: 'جواهرسازی، ساخت گردنبند',
           location: 'توحید',
           time: '2025-04-25T10:00:00.000Z',
@@ -35,7 +35,7 @@ const ExperienceHistory = ({ footer }: { footer: React.ReactNode }) => {
     recent: {
       list: [...new Array(15)].map(() => {
         return {
-          category: 'خلق',
+          category: 'music',
           title: 'جواهرسازی، ساخت گردنبند',
           location: 'توحید',
           time: '2025-04-28T12:00:00.000Z',
@@ -128,7 +128,7 @@ const ExperienceHistory = ({ footer }: { footer: React.ReactNode }) => {
                   <ExperienceItem
                     key={index}
                     address='رحیم خان'
-                    category='سگ'
+                    category={data.category}
                     date={data.time}
                     id={String(index)}
                     price={400000}

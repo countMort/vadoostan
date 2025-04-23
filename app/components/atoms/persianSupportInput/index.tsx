@@ -1,12 +1,14 @@
 import { PersianUtil } from '@/app/utils';
 import { InputBase, InputBaseProps } from '@mantine/core';
+import { InputHTMLAttributes } from 'react';
 import { IMaskInput } from 'react-imask';
 
 interface Props extends InputBaseProps {
   withThousandsSeparator?: boolean;
-  onChangeHandler: (e: string) => void;
+  onChangeHandler?: (e: string) => void;
   value?: string;
-  placeholder: string;
+  placeholder?: string;
+  onChange?: InputHTMLAttributes<HTMLInputElement>['onChange'];
 }
 
 const PersianSupportNumberInput = ({
@@ -14,12 +16,14 @@ const PersianSupportNumberInput = ({
   onChangeHandler,
   value,
   placeholder,
-
-  ...props
+  onChange,
 }: Props) => {
   return (
     <InputBase
-      {...props}
+      onChange={(e) => {
+        //@ts-expect-error error
+        onChange?.(e);
+      }}
       type='tel'
       component={IMaskInput}
       // mask={[
@@ -38,7 +42,7 @@ const PersianSupportNumberInput = ({
       prepare={(e) => PersianUtil.currentNumberToEnglish(e)}
       onAccept={(_, masked) => {
         const unmaskedValue = masked.unmaskedValue.toString();
-        onChangeHandler(unmaskedValue);
+        onChangeHandler?.(unmaskedValue);
         return unmaskedValue;
       }}
     />

@@ -35,18 +35,19 @@ const ProfilePage = () => {
               </Text>
             </div>
           </Link>
-
-          <div className={classes['action-item']}>
-            <Image
-              src={'/support.svg'}
-              width={50}
-              height={50}
-              alt='past-experience'
-            />
-            <Text fw={500} size='14px'>
-              {'پشتیبانی'}
-            </Text>
-          </div>
+          <Link href='https://t.me/vaDoostanSupport' target='_blanck'>
+            <div className={classes['action-item']}>
+              <Image
+                src={'/support.svg'}
+                width={50}
+                height={50}
+                alt='past-experience'
+              />
+              <Text fw={500} size='14px'>
+                {'پشتیبانی'}
+              </Text>
+            </div>
+          </Link>
         </div>
       </div>
       <LoginSigninInFooter />

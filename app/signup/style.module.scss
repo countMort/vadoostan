@@ -8,6 +8,17 @@
   margin-block-start: 16px;
 }
 
-// .input {
-//   width: 160px;
-// }
+.age-confirm {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.age-confirm-text {
+  font-size: 14px;
+  font-weight: 600;
+  margin-inline-start: 8px;
+  &--error {
+    color: #ee3f56;
+  }
+}

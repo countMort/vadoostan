@@ -4,10 +4,12 @@ export const SignupFormContext = createFormContext<{
   name: string;
   family: string;
   phone: string | undefined;
+  ageConfirm: boolean;
 }>({
   name: '',
   family: '',
   phone: undefined,
+  ageConfirm: false,
 });
 
 export const SignupFormProvider = ({
