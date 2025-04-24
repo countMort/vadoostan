@@ -144,7 +144,6 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
           rules={{
             validate: (value) => {
               if (!value) return 'fail';
-              else return false;
             },
           }}
           name='ageConfirm'

@@ -53,7 +53,7 @@ interface OTPverifyResponseProps extends Response {
   errorCode: number;
 }
 
-interface ExperienceDetailResponse extends Response {
+export interface ExperienceDetailResponse extends Response {
   result: {
     title: string;
     description: {
