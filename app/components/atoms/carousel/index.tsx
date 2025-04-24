@@ -3,20 +3,31 @@ import useEmblaCarousel from 'embla-carousel-react';
 import classes from './style.module.scss';
 import { useDotButton } from './useDotBotton';
 import classNames from 'classnames';
+import { baseUrl } from '@/services/apiClient';
+import Image from 'next/image';
 
-export const Carousel = () => {
+export const Carousel = ({
+  imagesUrl,
+}: {
+  imagesUrl: string[] | undefined;
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const { scrollSnaps, selectedIndex, onDotButtonClick } =
     useDotButton(emblaApi);
 
-  const slides = [
-    <div key={1} className={classes['embla__slide']}>
-      <img className={classes['image']} src={'/slide1.png'} alt='slide1' />
-    </div>,
-    <div key={2} className={classes['embla__slide']}>
-      <img className={classes['image']} src={'/slide2.png'} alt='slide2' />
-    </div>,
-  ];
+  const slides = (imagesUrl || []).map((url, index) => {
+    return (
+      <div key={index} className={classes['embla__slide']}>
+        <Image
+          width={200}
+          height={200}
+          className={classes['image']}
+          src={`https://${baseUrl}${url}`}
+          alt='slide1'
+        />
+      </div>
+    );
+  });
 
   return (
     <div className={classes['embla']} ref={emblaRef}>

@@ -11,7 +11,7 @@ const ActionButton = ({ children, ...rest }: MyTextInputProps) => {
   return (
     <Button
       {...rest}
-      radius={20}
+      radius={10}
       size='lg'
       fullWidth
       variant='filled'

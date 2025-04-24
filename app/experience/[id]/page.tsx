@@ -11,13 +11,14 @@ import {
   ErrorView,
 } from '@/app/components';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
-import { Loader } from '@mantine/core';
+import { Button, Loader } from '@mantine/core';
 import { colors } from '@/colors';
 import { ExperienceDate } from './experienceDate';
 import { DirectorInformation } from './directorInformation';
 import { Faq } from './faq';
+import { priceHumanize } from '@/app/utils/priceHumanize';
 
 export default function Experience({
   params,
@@ -25,6 +26,8 @@ export default function Experience({
   params: Promise<{ id: string }>;
 }) {
   const { id } = React.use(params);
+  const searchParams = useSearchParams();
+  const status = searchParams.get('status');
 
   const { isLoading, data, isError, isFetching, refetch, error } =
     useGetExperienceDetail({
@@ -67,7 +70,7 @@ export default function Experience({
           <BackIcon onClick={onBack} className={classes['back-icon']} />
           <div style={{ paddingBlockEnd: 80 }}>
             <div className={classes['carousel']}>
-              <Carousel />
+              <Carousel imagesUrl={data?.result.expPhotos} />
             </div>
             <ExperienceDate
               date={data?.result.date}
@@ -104,10 +107,32 @@ export default function Experience({
           </div>
           <FooterActionBarTemplate>
             <div className={classes['footer-wrapper']}>
-              <ActionButton onClick={onPay} style={{ width: 200, height: 60 }}>
-                ثبت نام در تجربه
-              </ActionButton>
-              <div className={classes['price-action']}>500 هزار تومان</div>
+              {status === 'active' ? (
+                <ActionButton
+                  onClick={onPay}
+                  style={{ width: 200, height: 60 }}
+                >
+                  ثبت نام در تجربه
+                </ActionButton>
+              ) : (
+                <Button
+                  styles={{
+                    root: {
+                      backgroundColor: '#DEDEDE',
+                      color: '#000000',
+                      fontSize: 18,
+                      borderRadius: 10,
+                    },
+                  }}
+                  style={{ width: 200, height: 60 }}
+                >
+                  تکمیل ظرفیت
+                </Button>
+              )}
+
+              <div className={classes['price-action']}>
+                {priceHumanize(data?.result.price)}
+              </div>
             </div>
           </FooterActionBarTemplate>
         </>

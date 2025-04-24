@@ -7,6 +7,7 @@ import { ExperienceItemStatus } from '@/sharedTypes.type';
 import { Experience } from '@/services/services';
 import moment from 'moment-jalaali';
 import { categoryLookup } from '@/app/utils/categoryLookup';
+import { priceHumanize } from '@/app/utils/priceHumanize';
 
 interface ExperienceItem extends Omit<Experience, 'isFilled'> {
   status: ExperienceItemStatus;
@@ -30,7 +31,7 @@ const ExperienceItem = ({
   const priceTag = (
     <div className={classNames(classes['price--tag'], classes['tag'])}>
       <Text size='12px' c={colors['cta-color']} fw={700}>
-        {`${price / 1000} هزار تومان`}
+        {priceHumanize(price)}
       </Text>
     </div>
   );
@@ -62,7 +63,7 @@ const ExperienceItem = ({
     <div
       onClick={() => {
         if (isActive || isSoldOut) {
-          redirect(`/experience/${id}`, RedirectType.push);
+          redirect(`/experience/${id}?status=${status}`, RedirectType.push);
         }
       }}
       className={classNames(
