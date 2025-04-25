@@ -18,7 +18,11 @@
   font-size: 14px;
   font-weight: 600;
   margin-inline-start: 8px;
+  color: #777777;
   &--error {
     color: #ee3f56;
+  }
+  &--confirmed {
+    color: #15a983;
   }
 }

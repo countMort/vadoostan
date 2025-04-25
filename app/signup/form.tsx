@@ -15,7 +15,7 @@ interface SignUpFormProps {
 
 const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
   const { Controller } = SignupFormContext;
-  const { handleSubmit } = SignupFormContext.useFormContext();
+  const { handleSubmit, watch } = SignupFormContext.useFormContext();
   const { errors } = SignupFormContext.useFormState();
   const { getValues } = SignupFormContext.useFormContext();
   const { mutate: onSignup, isPending } = useSignup();
@@ -155,6 +155,9 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
                     ...(errors.ageConfirm?.message && {
                       border: '1px solid #ee3f56',
                     }),
+                    ...(watch('ageConfirm') && {
+                      backgroundColor: '#15A983',
+                    }),
                   },
                 }}
                 checked={value}
@@ -169,7 +172,8 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
         <div
           className={classNames(
             classes['age-confirm-text'],
-            errors.ageConfirm?.message && classes['age-confirm-text--error']
+            errors.ageConfirm?.message && classes['age-confirm-text--error'],
+            watch('ageConfirm') && classes['age-confirm-text--confirmed']
           )}
         >
           تایید می‌کنم که حداقل 18 سال سن دارم
