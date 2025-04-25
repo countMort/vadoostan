@@ -69,7 +69,25 @@ export const ExperienceList = ({ footer }: { footer: React.ReactNode }) => {
     });
 
   const expList = data?.result.exps;
-  const groupedByDate = _.groupBy(expList, (item) => item.date.split('T')[0]);
+
+  const filteredData = data?.result.exps.filter(({ date }) => {
+    if (!selectedDate) return true;
+    return (
+      moment(date).format('YYYY/MM/DD') ===
+      moment(selectedDate).format('YYYY/MM/DD')
+    );
+  });
+
+  const groupedByDate = _.groupBy(
+    filteredData,
+    (item) => item.date.split('T')[0]
+  );
+
+  const groupedByDateForFilterList = _.groupBy(
+    expList,
+    (item) => item.date.split('T')[0]
+  );
+
   const titleDate =
     interSectedDateIndex && groupedByDate
       ? Object.entries(groupedByDate || [])?.[Number(interSectedDateIndex)]?.[
@@ -77,7 +95,9 @@ export const ExperienceList = ({ footer }: { footer: React.ReactNode }) => {
         ]
       : null;
 
-  const availableDate = Object.entries(groupedByDate).map(([date]) => date);
+  const availableDate = Object.entries(groupedByDateForFilterList).map(
+    ([date]) => date
+  );
 
   return (
     <>
