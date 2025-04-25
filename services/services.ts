@@ -1,5 +1,5 @@
 // hooks/useUsers.ts
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { skipToken, useMutation, useQuery } from '@tanstack/react-query';
 import { getAxiosInstance } from './apiClient';
 
 type ClientType = 'web' | 'telegram';
@@ -80,6 +80,27 @@ export interface ExperienceDetailResponse extends Response {
   };
 }
 
+interface GetInvoiceResponseProps extends Response {
+  result: {
+    expPrice: number;
+    tax: number;
+    payable: number;
+  };
+}
+
+interface GetInvoiceRequestProps {
+  id: string | null;
+}
+
+const getInvoice = async (
+  args: GetInvoiceRequestProps
+): Promise<GetInvoiceResponseProps> => {
+  const { data } = await getAxiosInstance().get(
+    `/api/payments/${args.id}/invoice`
+  );
+  return data;
+};
+
 const verifyOtp = async (
   args: OTPverifyRequestProps
 ): Promise<OTPverifyResponseProps> => {
@@ -125,6 +146,13 @@ export function useGetExperienceDetail({ id }: { id: string }) {
   return useQuery({
     queryKey: ['experience', id],
     queryFn: () => getExperienceDetail({ id }),
+  });
+}
+
+export function useGetInvoice({ id }: GetInvoiceRequestProps) {
+  return useQuery({
+    queryKey: ['invoice', id],
+    queryFn: id ? () => getInvoice({ id }) : skipToken,
   });
 }
 

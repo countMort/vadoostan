@@ -50,7 +50,7 @@ export default function Experience({
   };
 
   const onPay = () => {
-    router.push('/invoice');
+    router.push(`/invoice?expId=${id}`);
   };
 
   return (

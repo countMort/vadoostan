@@ -1,10 +1,16 @@
 'use client';
 import { LoginHeader } from '../components';
 import classes from './style.module.scss';
-import { useRouter } from 'next/navigation';
-import { Button, Text } from '@mantine/core';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Button, Skeleton, Text } from '@mantine/core';
+import { useGetInvoice } from '@/services/services';
+import { priceHumanize } from '../utils/priceHumanize';
 const Invoice = () => {
   const { back } = useRouter();
+  const searchParams = useSearchParams();
+  const expId = searchParams.get('expId');
+  const { data, isLoading } = useGetInvoice({ id: expId });
+
   return (
     <div className={classes['wrapper']}>
       <LoginHeader
@@ -22,17 +28,25 @@ const Invoice = () => {
           <Text size='14px' fw={600}>
             {'هزینه تجربه'}
           </Text>
-          <Text size='14px' fw={600}>
-            {'300 هزار‌تومان'}
-          </Text>
+          {isLoading ? (
+            <Skeleton height={20} width={60} />
+          ) : (
+            <Text size='14px' fw={600}>
+              {priceHumanize(data?.result.expPrice)}
+            </Text>
+          )}
         </div>
         <div className={classes['price-wrapper']}>
           <Text size='14px' fw={600}>
             {'مالیات'}
           </Text>
-          <Text size='14px' fw={600}>
-            {'30 هزار‌تومان'}
-          </Text>
+          {isLoading ? (
+            <Skeleton height={20} width={60} />
+          ) : (
+            <Text size='14px' fw={600}>
+              {priceHumanize(data?.result.tax)}
+            </Text>
+          )}
         </div>
       </div>
       <div className={classes['final-price']}>
@@ -40,9 +54,13 @@ const Invoice = () => {
           <Text size='14px' fw={600}>
             {'قابل پرداخت'}
           </Text>
-          <Text size='14px' fw={600}>
-            {'300 هزار‌تومان'}
-          </Text>
+          {isLoading ? (
+            <Skeleton height={20} width={60} />
+          ) : (
+            <Text size='14px' fw={600}>
+              {priceHumanize(data?.result.payable)}
+            </Text>
+          )}
         </div>
       </div>
       <div className={classes['pay-invoice']}>

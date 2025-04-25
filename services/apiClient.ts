@@ -6,8 +6,6 @@ import axios, {
   AxiosResponse,
 } from 'axios';
 
-// https://
-
 export const baseUrl = 'cute-crayfish-currently.ngrok-free.app';
 
 const baseConfig: AxiosRequestConfig = {
