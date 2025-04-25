@@ -25,7 +25,7 @@ export default function Home() {
                 width: 160,
                 height: 60,
                 backgroundColor: '#F5F7F6',
-                borderRadius: 20,
+                borderRadius: 10,
                 color: 'black',
                 fontSize: 18,
               }}
