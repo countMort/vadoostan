@@ -7,7 +7,6 @@ import {
   Carousel,
   FooterActionBarTemplate,
   ActionButton,
-  BackIcon,
   ErrorView,
 } from '@/app/components';
 import Image from 'next/image';
@@ -19,6 +18,7 @@ import { ExperienceDate } from './experienceDate';
 import { DirectorInformation } from './directorInformation';
 import { Faq } from './faq';
 import { priceHumanize } from '@/app/utils/priceHumanize';
+import { ExperienceBackIcon } from './experienceBackIcon';
 
 export default function Experience({
   params,
@@ -67,7 +67,7 @@ export default function Experience({
         </div>
       ) : (
         <>
-          <BackIcon onClick={onBack} className={classes['back-icon']} />
+          <ExperienceBackIcon onClick={onBack} />
           <div style={{ paddingBlockEnd: 80 }}>
             <div className={classes['carousel']}>
               <Carousel imagesUrl={data?.result.expPhotos} />

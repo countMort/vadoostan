@@ -1,4 +1,7 @@
 import Image from 'next/image';
+import classes from './style.module.scss';
+import classNames from 'classnames';
+
 const BackIcon = ({
   onClick,
   className,
@@ -7,15 +10,16 @@ const BackIcon = ({
   className?: string;
 }) => {
   return (
-    <Image
-      onClick={onClick}
-      src='/Vector.svg'
-      alt='backward icon'
-      width={7}
-      height={13}
-      priority
-      className={className}
-    />
+    <div className={classNames(classes['wrapper'], className)}>
+      <div className={classes['touch-area']} onClick={onClick} />
+      <Image
+        src='/Vector.svg'
+        alt='backward icon'
+        width={10}
+        height={10}
+        priority
+      />
+    </div>
   );
 };
 

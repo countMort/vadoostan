@@ -99,11 +99,18 @@
   height: 100%;
 }
 
-.back-icon {
-  position: absolute;
+.back-icon-wrapper {
+  position: absolute !important;
   z-index: 1000;
-  top: 50px;
-  right: 20px;
+  top: 21px;
+  right: 13px;
+  background-color: #fbfbfb;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loading {
