@@ -1,16 +1,9 @@
 import Image from 'next/image';
 import classes from './style.module.scss';
-import classNames from 'classnames';
 
-const BackIcon = ({
-  onClick,
-  className,
-}: {
-  onClick: () => void;
-  className?: string;
-}) => {
+const BackIcon = ({ onClick }: { onClick: () => void }) => {
   return (
-    <div className={classNames(classes['wrapper'], className)}>
+    <div className={classes['wrapper']}>
       <div
         className={classes['touch-area']}
         onClick={(e) => {

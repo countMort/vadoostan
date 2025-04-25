@@ -1,5 +1,5 @@
 .wrapper {
-  position: relative;
+  position: absolute;
 }
 .touch-area {
   width: 30px;
@@ -8,4 +8,5 @@
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+  cursor: pointer;
 }

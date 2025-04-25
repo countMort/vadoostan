@@ -13,7 +13,7 @@ const LoginHeader = ({
 }) => {
   return (
     <div style={{ ...style }} className={classes['title-wrapper']}>
-      <BackIcon onClick={onBack} className={classes['icon']} />
+      <BackIcon onClick={onBack} />
       <div className={classes['title']}>{title}</div>
     </div>
   );
