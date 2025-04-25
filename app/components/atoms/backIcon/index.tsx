@@ -11,7 +11,13 @@ const BackIcon = ({
 }) => {
   return (
     <div className={classNames(classes['wrapper'], className)}>
-      <div className={classes['touch-area']} onClick={onClick} />
+      <div
+        className={classes['touch-area']}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+      />
       <Image
         src='/Vector.svg'
         alt='backward icon'
