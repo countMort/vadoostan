@@ -66,10 +66,10 @@
   font-weight: 600;
 }
 .invalid-text {
-  color: #ee3f56;
+  color: colors.$error-text-color;
 }
 .can-resend {
-  color: #ee3f56;
+  color: colors.$error-text-color;
 }
 
 .timer {

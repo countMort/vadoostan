@@ -20,7 +20,7 @@
   margin-inline-start: 8px;
   color: #777777;
   &--error {
-    color: #ee3f56;
+    color: colors.$error-text-color;
   }
   &--confirmed {
     color: #15a983;

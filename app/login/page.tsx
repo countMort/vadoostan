@@ -1,5 +1,5 @@
 'use client';
-import { errorToast, LoginHeader, Otp, successToast } from '@/app/components';
+import { LoginHeader, Otp, successToast } from '@/app/components';
 import { useState } from 'react';
 import { LoginForm } from './form';
 import { useRouter } from 'next/navigation';
@@ -13,7 +13,7 @@ const Login = () => {
   const [loginStatus, setLoginStatus] = useState<LoginPageStatus>('login');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
-  const { mutate: onLogin, isPending } = useLogin();
+  const { mutate: onLogin, isPending, error } = useLogin();
 
   const handleOnback = () => {
     if (loginStatus === 'login') {
@@ -36,9 +36,6 @@ const Login = () => {
             successToast({ message: data.message });
             setPhoneNumber(phoneNumber);
           },
-          onError(error) {
-            errorToast({ message: error.message });
-          },
         }
       );
     }
@@ -51,7 +48,11 @@ const Login = () => {
         title={loginStatus === 'login' ? 'ورود' : 'تایید شماره موبایل'}
       />
       {loginStatus === 'login' ? (
-        <LoginForm isPending={isPending} onSubmitForm={onSubmitForm} />
+        <LoginForm
+          isPending={isPending}
+          onSubmitForm={onSubmitForm}
+          errorText={error?.message}
+        />
       ) : (
         <Otp mode='login' phoneNumber={phoneNumber} onVerify={onVerifyOtp} />
       )}
