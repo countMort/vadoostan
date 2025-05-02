@@ -154,7 +154,7 @@ const getExperienceDetail = async ({
 }: {
   id: string;
 }): Promise<ExperienceDetailResponse> => {
-  const { data } = await getAxiosInstance().get(`/api/experiences/${id}`);
+  const { data } = await getAxiosInstance().get(`/api/user/experiences/${id}`);
   return data;
 };
 
