@@ -3,24 +3,34 @@ import classes from './style.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import LoginSigninInFooter from '../components/molecules/loginSigninInFooter';
+import { ButtonLogout } from './logoutButton';
 
 const ProfilePage = () => {
   return (
     <>
       <div className={classes['wrapper']}>
-        <div className={classes['user-wrapper']}>
-          <div className={classes['user-image']}>
-            <Image src={'/profile.svg'} width={27} height={27} alt='profile' />
+        <div style={{ display: 'flex' }}>
+          <div className={classes['user-wrapper']}>
+            <div className={classes['user-image']}>
+              <Image
+                src={'/profile.svg'}
+                width={27}
+                height={27}
+                alt='profile'
+              />
+            </div>
+            <div className={classes['user-information']}>
+              <Text style={{ marginBlockEnd: 10 }} size='24px' fw={800}>
+                علی محمودی
+              </Text>
+              <Text size='18px' fw={500} c={'#A1A1A1'}>
+                09123456789
+              </Text>
+            </div>
           </div>
-          <div className={classes['user-information']}>
-            <Text style={{ marginBlockEnd: 10 }} size='24px' fw={800}>
-              علی محمودی
-            </Text>
-            <Text size='18px' fw={500} c={'#A1A1A1'}>
-              09123456789
-            </Text>
-          </div>
+          <ButtonLogout />
         </div>
+
         <div className={classes['action-wrapper']}>
           <Link href={'/experience-history'}>
             <div className={classes['action-item']}>

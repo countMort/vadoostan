@@ -8,6 +8,8 @@ import { Authenticate } from './authenticateFooter';
 
 export default async function LoginSigninInFooter() {
   const cookieStore = await cookies();
+
+  console.log({ cookieStore });
   const token = cookieStore.get('token');
 
   const unAuthenticated = (
