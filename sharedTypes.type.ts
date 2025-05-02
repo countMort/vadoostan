@@ -1,13 +1,10 @@
+import { Experience } from './services/services';
+
 export type ExperienceItemStatus =
   | 'soldout'
   | 'active-historial'
   | 'recent-historical'
   | 'active';
-export interface ExperienceItemProps {
-  category: string;
-  title: string;
-  location: string;
-  time: string;
-  price: string;
+export interface ExperienceItemProps extends Omit<Experience, 'isFilled'> {
   status: ExperienceItemStatus;
 }

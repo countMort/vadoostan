@@ -4,7 +4,6 @@ import { Otp } from '@/app/components';
 import { useState } from 'react';
 import { LoginHeader } from '@/app/components';
 import { useRouter } from 'next/navigation';
-import { setCookie } from 'cookies-next';
 
 type SignupStatus = 'signup' | 'otp';
 
@@ -20,8 +19,7 @@ const Signup = () => {
     setSignUpStatus('otp');
   };
 
-  const onVerifyOtp = async (token: string) => {
-    setCookie('token', token);
+  const onVerifyOtp = async () => {
     router.push('/experience-list');
   };
 

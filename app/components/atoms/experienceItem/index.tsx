@@ -3,15 +3,10 @@ import classes from './style.module.scss';
 import { Text } from '@/app/components';
 import { redirect, RedirectType } from 'next/navigation';
 import classNames from 'classnames';
-import { ExperienceItemStatus } from '@/sharedTypes.type';
-import { Experience } from '@/services/services';
 import moment from 'moment-jalaali';
 import { categoryLookup } from '@/app/utils/categoryLookup';
 import { priceHumanize } from '@/app/utils/priceHumanize';
-
-interface ExperienceItem extends Omit<Experience, 'isFilled'> {
-  status: ExperienceItemStatus;
-}
+import { ExperienceItemProps } from '@/sharedTypes.type';
 
 const ExperienceItem = ({
   category,
@@ -21,7 +16,7 @@ const ExperienceItem = ({
   date,
   status,
   id,
-}: ExperienceItem) => {
+}: ExperienceItemProps) => {
   const isSoldOut = status === 'soldout';
   const isActiveHistorical = status === 'active-historial';
   const isRecentHistorical = status === 'recent-historical';

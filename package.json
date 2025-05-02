@@ -21,6 +21,7 @@
     "classnames": "^2.5.1",
     "cookies-next": "^5.1.0",
     "embla-carousel-react": "^8.5.2",
+    "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
     "moment-jalaali": "^0.10.4",
     "next": "15.2.1",

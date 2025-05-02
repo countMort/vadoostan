@@ -5,8 +5,11 @@ import classes from './style.module.scss';
 import { Text } from '@mantine/core';
 import { ExperienceItemProps, ExperienceItemStatus } from '@/sharedTypes.type';
 import { useRouter } from 'next/navigation';
+import { useGetUserExperienceList } from '@/services/services';
+import { getCookie } from 'cookies-next';
+import { jwtDecode } from 'jwt-decode';
 
-interface mockHistoryListProps {
+interface UsersExperienceList {
   active: {
     name: string;
     list: ExperienceItemProps[];
@@ -18,32 +21,55 @@ interface mockHistoryListProps {
 }
 
 const ExperienceHistory = ({ footer }: { footer: React.ReactNode }) => {
-  const mockHistoryList: mockHistoryListProps = {
+  const token = getCookie('token') as string;
+  const { userId } = jwtDecode(token) as {
+    client: string;
+    iat: number;
+    userId: string;
+  };
+
+  const { data } = useGetUserExperienceList({
+    userId: userId,
+  });
+
+  const mockHistoryList: UsersExperienceList = {
     active: {
       name: 'تجربیات فعال',
-      list: [...new Array(30)].map(() => {
-        return {
-          category: 'music',
-          title: 'جواهرسازی، ساخت گردنبند',
-          location: 'توحید',
-          time: '2025-04-25T10:00:00.000Z',
-          price: '500 هزارتومان',
-          status: 'active-historial' as ExperienceItemStatus,
-        };
-      }),
+      list: (data?.result.exps || []).map(
+        ({ address, category, date, id, price, status, title }) => {
+          if (status === 'published') {
+            return {
+              category,
+              title,
+              price,
+              id,
+              address,
+              date,
+              time: date,
+              status: 'active-historial' as ExperienceItemStatus,
+            };
+          }
+        }
+      ) as ExperienceItemProps[],
     },
     recent: {
-      list: [...new Array(15)].map(() => {
-        return {
-          category: 'music',
-          title: 'جواهرسازی، ساخت گردنبند',
-          location: 'توحید',
-          time: '2025-04-28T12:00:00.000Z',
-          price: '500 هزارتومان',
-          status: 'recent-historical' as ExperienceItemStatus,
-        };
-      }),
       name: 'تجربیات گذشته',
+      list: (data?.result.exps || []).map(
+        ({ address, category, date, id, price, title, status }) => {
+          if (status === 'inactive') {
+            return {
+              category: category,
+              title: title,
+              time: date,
+              price: price,
+              id,
+              address,
+              date,
+              status: 'recent-historical' as ExperienceItemStatus,
+            };
+          }
+        }
+      ) as ExperienceItemProps[],
     },
   };
   const router = useRouter();
@@ -123,20 +149,25 @@ const ExperienceHistory = ({ footer }: { footer: React.ReactNode }) => {
                   {name}
                 </Text>
               ) : null}
-              {list.map((data, index) => {
-                return (
-                  <ExperienceItem
-                    key={index}
-                    address='رحیم خان'
-                    category={data.category}
-                    date={data.time}
-                    id={String(index)}
-                    price={400000}
-                    status='active-historial'
-                    title='گربه'
-                  />
-                );
-              })}
+              {list.map(
+                (
+                  { address, category, date, id, price, status, title },
+                  index
+                ) => {
+                  return (
+                    <ExperienceItem
+                      key={index}
+                      address={address}
+                      category={category}
+                      date={date}
+                      id={id}
+                      price={price}
+                      status={status}
+                      title={title}
+                    />
+                  );
+                }
+              )}
             </div>
           );
         })}

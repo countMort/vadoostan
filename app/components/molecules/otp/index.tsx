@@ -4,9 +4,10 @@ import OtpInput from 'react-otp-input';
 import { ActionButton, errorToast, successToast } from '@/app/components';
 import classes from './style.module.scss';
 import { useLogin, useVerifyOtp } from '@/services/services';
+import { setCookie } from 'cookies-next';
 
 interface OtpProps {
-  onVerify?: (token: string) => void;
+  onVerify?: () => void;
   // onResend?: () => void;
   phoneNumber?: string;
   mode: 'login' | 'signup';
@@ -72,8 +73,9 @@ const Otp = ({ onVerify, phoneNumber, mode }: OtpProps) => {
           otp: '1111',
         },
         {
-          onSuccess() {
-            onVerify?.('token');
+          onSuccess(data) {
+            onVerify?.();
+            setCookie('token', data.result.token);
           },
           onError(error) {
             errorToast({ message: error.message });

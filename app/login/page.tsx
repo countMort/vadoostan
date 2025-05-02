@@ -3,7 +3,6 @@ import { errorToast, LoginHeader, Otp, successToast } from '@/app/components';
 import { useState } from 'react';
 import { LoginForm } from './form';
 import { useRouter } from 'next/navigation';
-import { setCookie } from 'cookies-next';
 import { useLogin } from '@/services/services';
 
 type LoginPageStatus = 'login' | 'otp';
@@ -23,7 +22,6 @@ const Login = () => {
     }
   };
   const onVerifyOtp = () => {
-    setCookie('token', 'test-for-cookie-1');
     router.push('/experience-list');
   };
   const onSubmitForm = (phoneNumber?: string) => {

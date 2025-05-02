@@ -1,6 +1,7 @@
 // hooks/useUsers.ts
 import { skipToken, useMutation, useQuery } from '@tanstack/react-query';
 import { getAxiosInstance } from './apiClient';
+import { getCookie } from 'cookies-next';
 
 type ClientType = 'web' | 'telegram';
 
@@ -20,6 +21,13 @@ interface ExperiencesListResponce extends Response {
   result: {
     count: number;
     exps: Experience[];
+  };
+}
+
+interface UserExperienceListResponse extends Response {
+  result: {
+    count: number;
+    exps: (Experience & { status: 'inactive' | 'published' })[];
   };
 }
 
@@ -51,6 +59,14 @@ interface OTPverifyRequestProps {
 
 interface OTPverifyResponseProps extends Response {
   errorCode: number;
+  result: {
+    token: string;
+  };
+}
+
+interface GetUserExpListProps {
+  userId: string;
+  // status: 'inactive' | 'published';
 }
 
 export interface ExperienceDetailResponse extends Response {
@@ -125,7 +141,7 @@ const getExpList = async ({
 }: {
   status: ExperienceStatus;
 }): Promise<ExperiencesListResponce> => {
-  const { data } = await getAxiosInstance().get('/api/experiences', {
+  const { data } = await getAxiosInstance().get('/api/user/experiences', {
     params: {
       status,
     },
@@ -139,6 +155,21 @@ const getExperienceDetail = async ({
   id: string;
 }): Promise<ExperienceDetailResponse> => {
   const { data } = await getAxiosInstance().get(`/api/experiences/${id}`);
+  return data;
+};
+
+const getUserExpList = async ({
+  userId,
+}: GetUserExpListProps): Promise<UserExperienceListResponse> => {
+  const token = getCookie('token') as string;
+  const { data } = await getAxiosInstance().get(
+    `/api/users/${userId}/experiences`,
+    {
+      headers: {
+        Authorization: `${token}`,
+      },
+    }
+  );
   return data;
 };
 
@@ -178,5 +209,12 @@ export function useGetExperienceList({ status }: { status: ExperienceStatus }) {
   return useQuery({
     queryKey: ['experiences', status],
     queryFn: () => getExpList({ status }),
+  });
+}
+
+export function useGetUserExperienceList({ userId }: GetUserExpListProps) {
+  return useQuery({
+    queryKey: ['user-experiences', userId],
+    queryFn: () => getUserExpList({ userId }),
   });
 }
