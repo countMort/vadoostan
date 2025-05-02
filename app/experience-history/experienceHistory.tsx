@@ -22,11 +22,19 @@ interface UsersExperienceList {
 
 const ExperienceHistory = ({ footer }: { footer: React.ReactNode }) => {
   const token = getCookie('token') as string;
-  const { userId } = jwtDecode(token) as {
-    client: string;
-    iat: number;
-    userId: string;
-  };
+  const cookieData =
+    token &&
+    (jwtDecode(token) as {
+      client: string;
+      iat: number;
+      userId: string;
+    });
+
+  let userId: string | undefined = undefined;
+
+  if (cookieData) {
+    userId = cookieData.userId;
+  }
 
   const { data } = useGetUserExperienceList({
     userId: userId,

@@ -65,7 +65,7 @@ interface OTPverifyResponseProps extends Response {
 }
 
 interface GetUserExpListProps {
-  userId: string;
+  userId: string | undefined;
   // status: 'inactive' | 'published';
 }
 
@@ -215,6 +215,6 @@ export function useGetExperienceList({ status }: { status: ExperienceStatus }) {
 export function useGetUserExperienceList({ userId }: GetUserExpListProps) {
   return useQuery({
     queryKey: ['user-experiences', userId],
-    queryFn: () => getUserExpList({ userId }),
+    queryFn: userId ? () => getUserExpList({ userId }) : skipToken,
   });
 }
