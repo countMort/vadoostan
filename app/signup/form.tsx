@@ -1,11 +1,20 @@
 'use client';
-import { ActionButton, successToast, TextInput } from '@/app/components';
+import {
+  ActionButton,
+  successToast,
+  TextInput,
+  ErrorText,
+} from '@/app/components';
 import classes from './style.module.scss';
 import { SignupFormContext, SignupFormProvider } from './formProvider';
 import { Checkbox, Grid, Input } from '@mantine/core';
-import { familyRules, nameRules, phoneNumberRule } from '@/app/utils';
+import {
+  familyRules,
+  inputWrapperErrorStyle,
+  nameRules,
+  phoneNumberRule,
+} from '@/app/utils';
 import { useSignup } from '@/services/services';
-import { errorToast } from '@/app/components';
 // import { PersianSupportNumberInput } from '../components/atoms/persianSupportInput';
 import classNames from 'classnames';
 
@@ -18,7 +27,7 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
   const { handleSubmit, watch } = SignupFormContext.useFormContext();
   const { errors } = SignupFormContext.useFormState();
   const { getValues } = SignupFormContext.useFormContext();
-  const { mutate: onSignup, isPending } = useSignup();
+  const { mutate: onSignup, isPending, error } = useSignup();
 
   const onSubmit = () => {
     const { family, name, phone } = getValues();
@@ -32,21 +41,10 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
       {
         onSuccess() {
           successToast({ message: 'کد ارسال شد!' });
-
           onSubmitForm(getValues('phone')?.toString());
-        },
-        onError(error) {
-          errorToast({ message: error.message });
         },
       }
     );
-  };
-
-  const inputWrapperErrorStyle = {
-    marginTop: 10,
-    fontSize: 14,
-    fontWeight: 600,
-    color: '#EE3F56',
   };
 
   return (
@@ -117,8 +115,8 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
             error={errors.phone?.message}
           >
             <TextInput
+              type='tel'
               onChange={(e) => {
-                console.log(field.value);
                 if (e.target.value.length <= 11) {
                   field.onChange(e);
                 }
@@ -179,6 +177,7 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
           تایید می‌کنم که حداقل 18 سال سن دارم
         </div>
       </div>
+      {error ? <ErrorText errorText={error.message} /> : null}
       <ActionButton
         loading={isPending}
         onClick={handleSubmit(onSubmit)}

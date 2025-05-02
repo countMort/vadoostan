@@ -25,6 +25,7 @@ export const Text = ({
         fontSize: size,
         color: c,
         lineHeight: lineHeight ?? 1,
+        fontFamily: 'vazir',
         ...style,
       }}
       className={className}

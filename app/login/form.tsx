@@ -1,15 +1,16 @@
 'use client';
-import { ActionButton } from '@/app/components';
+import { ActionButton, ErrorText } from '@/app/components';
 import { LoginFormContext, LoginFormProvider } from './formProvider';
 import { Input, TextInput } from '@mantine/core';
-import { phoneNumberRule } from '@/app/utils';
+import { inputWrapperErrorStyle, phoneNumberRule } from '@/app/utils';
 
 interface SignUpFormProps {
   onSubmitForm: (phone?: string) => void;
   isPending: boolean;
+  errorText: string | undefined;
 }
 
-const LoginForm = ({ onSubmitForm, isPending }: SignUpFormProps) => {
+const LoginForm = ({ onSubmitForm, isPending, errorText }: SignUpFormProps) => {
   const { Controller } = LoginFormContext;
   const { handleSubmit } = LoginFormContext.useFormContext();
   const { errors } = LoginFormContext.useFormState();
@@ -26,9 +27,15 @@ const LoginForm = ({ onSubmitForm, isPending }: SignUpFormProps) => {
         name='phone'
         rules={phoneNumberRule}
         render={({ field }) => (
-          <Input.Wrapper error={errors.phone?.message}>
+          <Input.Wrapper
+            styles={{
+              error: inputWrapperErrorStyle,
+            }}
+            error={errors.phone?.message}
+          >
             <TextInput
               {...field}
+              type='tel'
               onChange={field.onChange}
               style={{ width: '100%' }}
               styles={{
@@ -43,6 +50,7 @@ const LoginForm = ({ onSubmitForm, isPending }: SignUpFormProps) => {
           </Input.Wrapper>
         )}
       />
+      {errorText ? <ErrorText errorText={errorText ?? ''} /> : null}
       <ActionButton
         loading={isPending}
         onClick={handleSubmit(onSubmit)}
@@ -54,10 +62,18 @@ const LoginForm = ({ onSubmitForm, isPending }: SignUpFormProps) => {
   );
 };
 
-const FormProvider = ({ onSubmitForm, isPending }: SignUpFormProps) => {
+const FormProvider = ({
+  onSubmitForm,
+  isPending,
+  errorText,
+}: SignUpFormProps) => {
   return (
     <LoginFormProvider>
-      <LoginForm onSubmitForm={onSubmitForm} isPending={isPending} />
+      <LoginForm
+        onSubmitForm={onSubmitForm}
+        isPending={isPending}
+        errorText={errorText}
+      />
     </LoginFormProvider>
   );
 };
