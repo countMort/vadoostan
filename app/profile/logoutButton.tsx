@@ -9,7 +9,7 @@ export const ButtonLogout = () => {
   };
   return (
     <Link href={'/experience-list'} onClick={handleOnClickLogout}>
-      <Button style={{ marginInlineStart: 30 }}>خروج</Button>
+      <Button style={{ marginInlineStart: 30 }}>Exit For Test</Button>
     </Link>
   );
 };

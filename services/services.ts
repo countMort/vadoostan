@@ -108,6 +108,50 @@ interface GetInvoiceRequestProps {
   id: string | null;
 }
 
+export interface GetDataForExperienceCreationProps extends Response {
+  result: {
+    templates: {
+      exp: {
+        id: string;
+        categoryId: number;
+        cityId: number;
+        title: string;
+        description: string;
+        label: null;
+        isSeries: boolean;
+        creatorUserId: string;
+      };
+      faqs: {
+        question: string;
+        answer: string;
+      }[];
+      medias: {
+        url: string;
+        type: string;
+      }[];
+    }[];
+    inclusions: {
+      id: number;
+      title: string;
+    }[];
+    venues: {
+      id: number;
+      title: string;
+    }[];
+    directors: {
+      userId: string;
+      name: string;
+      bio: string;
+      photoUrl: string;
+    }[];
+    assistants: string[];
+    categories: {
+      id: number;
+      title: string;
+    }[];
+  };
+}
+
 const getInvoice = async (
   args: GetInvoiceRequestProps
 ): Promise<GetInvoiceResponseProps> => {
@@ -173,6 +217,20 @@ const getUserExpList = async ({
   return data;
 };
 
+const getDataForExperienceCreation =
+  async (): Promise<GetDataForExperienceCreationProps> => {
+    const token = getCookie('token') as string;
+    const { data } = await getAxiosInstance().get(
+      '/api/admin/experiences/creation/data',
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    );
+    return data;
+  };
+
 export function useGetExperienceDetail({ id }: { id: string }) {
   return useQuery({
     queryKey: ['experience', id],
@@ -216,5 +274,12 @@ export function useGetUserExperienceList({ userId }: GetUserExpListProps) {
   return useQuery({
     queryKey: ['user-experiences', userId],
     queryFn: userId ? () => getUserExpList({ userId }) : skipToken,
+  });
+}
+
+export function useGetDataForExperienceCreation() {
+  return useQuery({
+    queryKey: ['/api/admin/experiences/creation/data'],
+    queryFn: () => getDataForExperienceCreation(),
   });
 }

@@ -1,4 +1,4 @@
-import { Text } from '@mantine/core';
+import { Button, Text } from '@mantine/core';
 import classes from './style.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -59,6 +59,9 @@ const ProfilePage = () => {
             </div>
           </Link>
         </div>
+        <Link href={'/newexp'}>
+          <Button style={{ marginTop: 100 }}>create Experience</Button>
+        </Link>
       </div>
       <LoginSigninInFooter />
     </>
