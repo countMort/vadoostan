@@ -15,7 +15,7 @@ export const DirectorInformation = ({
     <div className={classes['director']}>
       <Image
         className={classes['director--image']}
-        src={`https://${baseUrl}${photoUrl}`}
+        src={`${baseUrl}${photoUrl}`}
         width={55}
         height={55}
         alt='director-image'

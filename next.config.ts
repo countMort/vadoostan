@@ -1,13 +1,13 @@
 import type { NextConfig } from 'next';
 import path from 'path';
-import { baseUrl } from './services/apiClient';
+import { baseUrl, hostName } from './constants';
 
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: baseUrl,
+        protocol: 'http',
+        hostname: hostName,
         port: '',
         pathname: '/public/**',
         search: '',
@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/:path*', // Your local proxy endpoint
-        destination: `https://${baseUrl}/api/:path*`, // Target URL
+        destination: `${baseUrl}/api/:path*`, // Target URL
       },
     ];
   },

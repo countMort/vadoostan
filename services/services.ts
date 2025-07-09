@@ -1,182 +1,45 @@
 // hooks/useUsers.ts
 import { skipToken, useMutation, useQuery } from '@tanstack/react-query';
-import { getAxiosInstance } from './apiClient';
-import { getCookie } from 'cookies-next';
-
-type ClientType = 'web' | 'telegram';
-
-type ExperienceStatus = 'PUBLISHED';
-
-export interface Experience {
-  id: string;
-  title: string;
-  category: string;
-  price: number;
-  date: string;
-  address: string;
-  isFilled: boolean;
-}
-
-interface ExperiencesListResponce extends Response {
-  result: {
-    count: number;
-    exps: Experience[];
-  };
-}
-
-interface UserExperienceListResponse extends Response {
-  result: {
-    count: number;
-    exps: (Experience & { status: 'inactive' | 'published' })[];
-  };
-}
-
-interface Response {
-  isSuccessful: boolean;
-  message: string;
-  traceId: string;
-  errorCode: number;
-}
-
-interface LoginRequestProps {
-  mobileNumber: string;
-  client: ClientType;
-}
-
-interface SignupRequestProps {
-  mobileNumber: string;
-  firstName: string;
-  lastName: string;
-  client: ClientType;
-}
-type SignupResponseProps = Response;
-
-interface OTPverifyRequestProps {
-  mobileNumber: string;
-  otp: string;
-  client: ClientType;
-}
-
-interface OTPverifyResponseProps extends Response {
-  errorCode: number;
-  result: {
-    token: string;
-  };
-}
-
-interface GetUserExpListProps {
-  userId: string | undefined;
-  // status: 'inactive' | 'published';
-}
-
-export interface ExperienceDetailResponse extends Response {
-  result: {
-    title: string;
-    description: {
-      main: string;
-    };
-    date: string;
-    address: string;
-    price: number;
-    directors: [
-      {
-        name: string;
-        bio: string;
-        photoUrl: string;
-      },
-    ];
-    expPhotos: string[];
-    faqs: [
-      {
-        question: string;
-        answer: string;
-      },
-    ];
-    inclusions: string[];
-  };
-}
-
-interface GetInvoiceResponseProps extends Response {
-  result: {
-    expPrice: number;
-    tax: number;
-    payable: number;
-  };
-}
-
-interface GetInvoiceRequestProps {
-  id: string | null;
-}
-
-export interface GetDataForExperienceCreationProps extends Response {
-  result: {
-    templates: {
-      exp: {
-        id: string;
-        categoryId: number;
-        cityId: number;
-        title: string;
-        description: string;
-        label: null;
-        isSeries: boolean;
-        creatorUserId: string;
-      };
-      faqs: {
-        question: string;
-        answer: string;
-      }[];
-      medias: {
-        url: string;
-        type: string;
-      }[];
-    }[];
-    inclusions: {
-      id: number;
-      title: string;
-    }[];
-    venues: {
-      id: number;
-      title: string;
-    }[];
-    directors: {
-      userId: string;
-      name: string;
-      bio: string;
-      photoUrl: string;
-    }[];
-    assistants: string[];
-    categories: {
-      id: number;
-      title: string;
-    }[];
-  };
-}
+import { axiosInstance } from './apiClient';
+import {
+  ExperienceDetailResponse,
+  ExperiencesListResponce,
+  ExperienceStatus,
+  GetDataForExperienceCreationProps,
+  GetInvoiceRequestProps,
+  GetInvoiceResponseProps,
+  GetUserExpListProps,
+  LoginRequestProps,
+  OTPverifyRequestProps,
+  OTPverifyResponseProps,
+  SignupRequestProps,
+  SignupResponseProps,
+  UserExperienceListResponse,
+} from '@/types/services.type';
 
 const getInvoice = async (
   args: GetInvoiceRequestProps
 ): Promise<GetInvoiceResponseProps> => {
-  const { data } = await getAxiosInstance().get(
-    `/api/payments/${args.id}/invoice`
-  );
+  const { data } = await axiosInstance.get(`/api/payments/${args.id}/invoice`);
   return data;
 };
 
 const verifyOtp = async (
   args: OTPverifyRequestProps
 ): Promise<OTPverifyResponseProps> => {
-  const { data } = await getAxiosInstance().post('/api/auth/verify-otp', args);
+  const { data } = await axiosInstance.post('/api/auth/verify-otp', args);
   return data;
 };
 
 const fetchUsers = async (
   args: SignupRequestProps
 ): Promise<SignupResponseProps> => {
-  const { data } = await getAxiosInstance().post('/api/auth/signup', args);
+  const { data } = await axiosInstance.post('/api/auth/signup', args);
   return data;
 };
 
 const login = async (args: LoginRequestProps): Promise<Response> => {
-  const { data } = await getAxiosInstance().post('/api/auth/login', args);
+  const { data } = await axiosInstance.post('/api/auth/login', args);
   return data;
 };
 
@@ -185,7 +48,7 @@ const getExpList = async ({
 }: {
   status: ExperienceStatus;
 }): Promise<ExperiencesListResponce> => {
-  const { data } = await getAxiosInstance().get('/api/user/experiences', {
+  const { data } = await axiosInstance.get('/api/user/experiences', {
     params: {
       status,
     },
@@ -198,35 +61,21 @@ const getExperienceDetail = async ({
 }: {
   id: string;
 }): Promise<ExperienceDetailResponse> => {
-  const { data } = await getAxiosInstance().get(`/api/user/experiences/${id}`);
+  const { data } = await axiosInstance.get(`/api/user/experiences/${id}`);
   return data;
 };
 
 const getUserExpList = async ({
   userId,
 }: GetUserExpListProps): Promise<UserExperienceListResponse> => {
-  const token = getCookie('token') as string;
-  const { data } = await getAxiosInstance().get(
-    `/api/users/${userId}/experiences`,
-    {
-      headers: {
-        Authorization: `${token}`,
-      },
-    }
-  );
+  const { data } = await axiosInstance.get(`/api/users/${userId}/experiences`);
   return data;
 };
 
 const getDataForExperienceCreation =
   async (): Promise<GetDataForExperienceCreationProps> => {
-    const token = getCookie('token') as string;
-    const { data } = await getAxiosInstance().get(
-      '/api/admin/experiences/creation/data',
-      {
-        headers: {
-          Authorization: `${token}`,
-        },
-      }
+    const { data } = await axiosInstance.get(
+      '/api/admin/experiences/creation/data'
     );
     return data;
   };

@@ -1,4 +1,4 @@
-import { Experience } from './services/services';
+import { Experience } from './services.type';
 
 export type ExperienceItemStatus =
   | 'soldout'

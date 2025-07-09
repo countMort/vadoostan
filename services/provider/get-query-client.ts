@@ -1,10 +1,10 @@
+import { ApiError } from '@/types/services.type';
 import {
   QueryClient,
   defaultShouldDehydrateQuery,
   isServer,
 } from '@tanstack/react-query';
 import '@tanstack/react-query';
-import { ApiError } from '../apiClient';
 
 declare module '@tanstack/react-query' {
   interface Register {

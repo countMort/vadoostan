@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import moment from 'moment-jalaali';
 import { categoryLookup } from '@/app/utils/categoryLookup';
 import { priceHumanize } from '@/app/utils/priceHumanize';
-import { ExperienceItemProps } from '@/sharedTypes.type';
+import { ExperienceItemProps } from '@/types/sharedTypes.type';
 
 const ExperienceItem = ({
   category,

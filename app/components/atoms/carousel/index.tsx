@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import useEmblaCarousel from 'embla-carousel-react';
 import classes from './style.module.scss';
 import { useDotButton } from './useDotBotton';
@@ -22,7 +21,7 @@ export const Carousel = ({
           width={200}
           height={200}
           className={classes['image']}
-          src={`https://${baseUrl}${url}`}
+          src={`${baseUrl}/${url}`}
           alt='slide1'
         />
       </div>
