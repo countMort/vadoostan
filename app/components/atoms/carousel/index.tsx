@@ -2,8 +2,8 @@ import useEmblaCarousel from 'embla-carousel-react';
 import classes from './style.module.scss';
 import { useDotButton } from './useDotBotton';
 import classNames from 'classnames';
-import { baseUrl } from '@/services/apiClient';
 import Image from 'next/image';
+import { baseUrl } from '@/constants';
 
 export const Carousel = ({
   imagesUrl,
