@@ -50,7 +50,7 @@ const Otp = ({ onVerify, phoneNumber, mode }: OtpProps) => {
       onLogin(
         { client: 'web', mobileNumber: phoneNumber as string },
         {
-          onSuccess: ({ message }) => {
+          onSuccess: ({ message }: any) => {
             successToast({ message: message });
             setTimer(120);
             setCanResend(false);

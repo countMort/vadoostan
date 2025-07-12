@@ -29,7 +29,7 @@ const Login = () => {
       onLogin(
         { client: 'web', mobileNumber: phoneNumber },
         {
-          onSuccess(data) {
+          onSuccess(data: any) {
             setLoginStatus('otp');
             successToast({ message: data.message });
             setPhoneNumber(phoneNumber);
