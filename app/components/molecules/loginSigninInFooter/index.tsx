@@ -1,5 +1,5 @@
 'use server';
-import { ActionButton, FooterActionBarTemplate } from '../../atoms';
+import { Button, FooterActionBarTemplate } from '../../atoms';
 import { Text } from '@/app/components';
 import classes from './style.module.scss';
 import Link from 'next/link';
@@ -14,9 +14,9 @@ export default async function LoginSigninInFooter() {
 
   const unAuthenticated = (
     <div className={classes['wrapper']}>
-      <ActionButton style={{ width: 160, height: 60 }}>
+      <Button style={{ width: 160, height: 60 }}>
         <Link href={'/signup'}>ثبت نام</Link>
-      </ActionButton>
+      </Button>
       <Text
         style={{
           display: 'flex',

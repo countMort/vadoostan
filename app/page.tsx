@@ -1,6 +1,5 @@
-import { ActionButton, Text } from '@/app/components';
+import { Button, Text } from '@/app/components';
 import classes from './style.module.scss';
-import { Button } from '@mantine/core';
 import Link from 'next/link';
 
 export default function Home() {
@@ -17,9 +16,9 @@ export default function Home() {
             </Text>
           </div>
           <div className={classes['buttons']}>
-            <ActionButton style={{ width: 160, height: 60 }}>
+            <Button style={{ width: 160, height: 60 }}>
               <Link href='/signup'>ثبت نام</Link>
-            </ActionButton>
+            </Button>
             <Button
               style={{
                 width: 160,

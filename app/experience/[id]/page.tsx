@@ -6,13 +6,13 @@ import {
   ExperienceOption,
   Carousel,
   FooterActionBarTemplate,
-  ActionButton,
+  Button,
   ErrorView,
 } from '@/app/components';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
-import { Button, Loader } from '@mantine/core';
+import { Loader } from '@mantine/core';
 import { colors } from '@/colors';
 import { ExperienceDate } from './experienceDate';
 import { DirectorInformation } from './directorInformation';
@@ -108,12 +108,9 @@ export default function Experience({
           <FooterActionBarTemplate>
             <div className={classes['footer-wrapper']}>
               {status === 'active' ? (
-                <ActionButton
-                  onClick={onPay}
-                  style={{ width: 200, height: 60 }}
-                >
+                <Button onClick={onPay} style={{ width: 200, height: 60 }}>
                   ثبت نام در تجربه
-                </ActionButton>
+                </Button>
               ) : (
                 <Button
                   styles={{

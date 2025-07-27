@@ -7,6 +7,7 @@ import {
   DirectionProvider,
   mantineHtmlProps,
 } from '@mantine/core';
+import '@/assets/main.css';
 import classes from './style.module.scss';
 import './font.module.scss';
 import Providers from '@/services/provider';

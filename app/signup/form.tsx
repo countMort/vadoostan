@@ -1,6 +1,6 @@
 'use client';
 import {
-  ActionButton,
+  Button,
   successToast,
   TextInput,
   ErrorText,
@@ -178,13 +178,13 @@ const SignUpForm = ({ onSubmitForm }: SignUpFormProps) => {
         </div>
       </div>
       {error ? <ErrorText errorText={error.message} /> : null}
-      <ActionButton
+      <Button
         loading={isPending}
         onClick={handleSubmit(onSubmit)}
         className={classes['button']}
       >
         ادامه
-      </ActionButton>
+      </Button>
     </>
   );
 };

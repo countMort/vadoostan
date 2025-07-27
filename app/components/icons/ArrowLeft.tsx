@@ -1,5 +1,3 @@
-'use client';
-
 export const ArrowLeft = () => {
   return (
     <svg

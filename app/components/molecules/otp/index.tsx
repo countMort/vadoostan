@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import OtpInput from 'react-otp-input';
-import { ActionButton, errorToast, successToast } from '@/app/components';
+import { Button, errorToast, successToast } from '@/app/components';
 import classes from './style.module.scss';
 import { useLogin, useVerifyOtp } from '@/services/services';
 import { setCookie } from 'cookies-next';
@@ -121,13 +121,13 @@ const Otp = ({ onVerify, phoneNumber, mode }: OtpProps) => {
         )}
       </div>
 
-      <ActionButton
+      <Button
         loading={isPending || isPendingLogin}
         onClick={handleVerify}
         disabled={otp.length !== 4}
       >
         {mode === 'login' ? 'تایید و ورود' : 'تایید و ثبت نام'}
-      </ActionButton>
+      </Button>
     </div>
   );
 };

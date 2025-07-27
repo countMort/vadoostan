@@ -1,5 +1,5 @@
 'use client';
-import { ActionButton, ErrorText } from '@/app/components';
+import { Button, ErrorText } from '@/app/components';
 import { LoginFormContext, LoginFormProvider } from './formProvider';
 import { Input, TextInput } from '@mantine/core';
 import { inputWrapperErrorStyle, phoneNumberRule } from '@/app/utils';
@@ -51,13 +51,13 @@ const LoginForm = ({ onSubmitForm, isPending, errorText }: SignUpFormProps) => {
         )}
       />
       {errorText ? <ErrorText errorText={errorText ?? ''} /> : null}
-      <ActionButton
+      <Button
         loading={isPending}
         onClick={handleSubmit(onSubmit)}
         style={{ marginBlockStart: 16 }}
       >
         ادامه
-      </ActionButton>
+      </Button>
     </>
   );
 };

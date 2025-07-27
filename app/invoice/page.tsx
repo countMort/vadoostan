@@ -13,7 +13,7 @@ const Invoice = () => {
   const { data, isLoading } = useGetInvoice({ id: expId });
 
   return (
-    <div className={classes['wrapper']}>
+    <div className='pt-12.5 pb-6 px-12.5 relative h-full flex flex-col'>
       <LoginHeader
         style={{ marginBlockEnd: 48 }}
         onBack={() => {
@@ -64,11 +64,9 @@ const Invoice = () => {
           )}
         </div>
       </div>
-      <div className={classes['pay-invoice']}>
-        <Button fullWidth c={'#ffffff'} bg={'#15A983'} radius={20} h={60}>
-          {'پرداخت'}
-        </Button>
-      </div>
+      <Button mt='auto' c={'#ffffff'} bg={'#15A983'} h={60}>
+        {'پرداخت'}
+      </Button>
     </div>
   );
 };
